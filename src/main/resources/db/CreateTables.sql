@@ -1,7 +1,8 @@
 CREATE TABLE code
 (
     code_id BIGSERIAL PRIMARY KEY NOT NULL ,
-    description CHARACTER VARYING(5),
+    char_code CHARACTER VARYING(5),
+    description CHARACTER VARYING(255),
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP
 );
@@ -26,6 +27,7 @@ CREATE TABLE department
 CREATE TABLE person
 (
     person_id BIGSERIAL PRIMARY KEY  NOT NULL ,
+    num CHARACTER VARYING(30),
     first_name CHARACTER VARYING(30),
     last_name CHARACTER VARYING(30),
     birthday TIMESTAMP,
