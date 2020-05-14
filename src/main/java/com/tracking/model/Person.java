@@ -27,10 +27,21 @@ public class Person extends AbstractEntity{
 
     private LocalDate birthday;
 
+    @Column(name = "is_remote")
     private Boolean isRemote;
 
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @OneToOne(mappedBy = "person",fetch = FetchType.LAZY)
+    private Address address;
+
+    @OneToOne(mappedBy = "person",fetch = FetchType.LAZY)
+    private Contact contact;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;
 
 }

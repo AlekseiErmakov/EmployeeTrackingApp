@@ -16,7 +16,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <spring.version>5.2.6.RELEASE</spring.version>
-    <postgres.version>9.1-901-1.jdbc4</postgres.version>
+    <postgres.version>42.2.12</postgres.version>
     <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
     <hibernate.version>5.4.15.Final</hibernate.version>
     <javaxservlet.version>4.0.1</javaxservlet.version>
@@ -77,9 +77,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>postgresql</groupId>
+      <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>${postgres.version}</version>
+      <version>42.2.12</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>

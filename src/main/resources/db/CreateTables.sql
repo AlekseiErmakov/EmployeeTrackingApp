@@ -54,7 +54,7 @@ CREATE TABLE address
     address_id BIGSERIAL PRIMARY KEY NOT NULL ,
     city CHARACTER VARYING(30),
     street CHARACTER VARYING(30),
-    house INTEGER,
+    house CHARACTER VARYING(10),
     flat INTEGER,
     person_id BIGINT,
     created TIMESTAMP NOT NULL ,
