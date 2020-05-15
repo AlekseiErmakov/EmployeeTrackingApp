@@ -1,6 +1,5 @@
 package com.tracking.repository;
 
-import com.tracking.model.Department;
 import com.tracking.model.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,7 +39,7 @@ public class PersonRepositoryImpl implements PersonRepository {
     public List<Person> findAll() {
         Session currentSession = sessionFactory.getCurrentSession();
         CriteriaBuilder cb = currentSession.getCriteriaBuilder();
-        CriteriaQuery <Person> cq = cb.createQuery(Person.class);
+        CriteriaQuery<Person> cq = cb.createQuery(Person.class);
         Root<Person> root = cq.from(Person.class);
         cq.select(root);
         Query query = currentSession.createQuery(cq);
@@ -53,8 +52,6 @@ public class PersonRepositoryImpl implements PersonRepository {
         Person person = currentSession.byId(Person.class).load(id);
         currentSession.delete(person);
     }
-
-
 
 
 }
