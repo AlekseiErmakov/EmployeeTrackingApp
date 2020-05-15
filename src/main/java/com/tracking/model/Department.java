@@ -21,6 +21,7 @@ public class Department extends AbstractEntity{
     @Column(name = "department_id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "department",fetch = FetchType.LAZY)

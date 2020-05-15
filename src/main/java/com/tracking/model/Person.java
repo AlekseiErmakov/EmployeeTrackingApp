@@ -19,15 +19,20 @@ public class Person extends AbstractEntity{
     @Column(name = "person_id")
     private Long id;
 
+    @Column(name = "num")
     private String num;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "birthday")
     private LocalDate birthday;
 
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "sex")
     private Sex sex;
 
     @Column(name = "is_remote")

@@ -5,21 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "code")
+@Table(name = "holiday")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Code extends AbstractEntity {
+public class Holiday extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private LocalDate date;
 
-    @Column(name = "char_code")
-    private String charCode;
-
-    @Column(name = "description")
-    private String description;
+    @ManyToOne
+    private Code code;
 }

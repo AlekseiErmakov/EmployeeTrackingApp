@@ -20,6 +20,7 @@ public class Post extends AbstractEntity{
     @Column(name = "post_id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)

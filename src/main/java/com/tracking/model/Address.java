@@ -18,12 +18,16 @@ public class Address extends AbstractEntity{
     @Column(name = "address_id")
     private Long id;
 
+    @Column(name = "city")
     private String city;
 
+    @Column(name = "street")
     private String street;
 
+    @Column(name = "house")
     private String house;
 
+    @Column(name = "flat")
     private Integer flat;
 
     @OneToOne(orphanRemoval = true)

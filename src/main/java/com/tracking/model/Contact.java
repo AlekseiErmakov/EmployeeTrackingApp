@@ -15,10 +15,13 @@ public class Contact extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contact_id")
     private Long id;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "phone")
     private String phone;
 
     @OneToOne(orphanRemoval = true)
