@@ -1,6 +1,6 @@
 package com.tracking.model;
 
-import com.sun.org.apache.xpath.internal.operations.String;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

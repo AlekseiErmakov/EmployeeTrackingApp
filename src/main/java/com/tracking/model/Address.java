@@ -20,6 +20,8 @@ public class Address extends AbstractEntity{
 
     private String city;
 
+    private String street;
+
     private String house;
 
     private Integer flat;

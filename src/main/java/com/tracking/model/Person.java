@@ -27,10 +27,13 @@ public class Person extends AbstractEntity{
 
     private LocalDate birthday;
 
+    @Enumerated(value = EnumType.STRING)
+    private Sex sex;
+
     @Column(name = "is_remote")
     private Boolean isRemote;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
     private Department department;
 
@@ -40,7 +43,7 @@ public class Person extends AbstractEntity{
     @OneToOne(mappedBy = "person",fetch = FetchType.LAZY)
     private Contact contact;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private Post post;
 

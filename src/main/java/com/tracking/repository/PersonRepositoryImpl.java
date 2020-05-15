@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Query;
+import org.hibernate.query.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -42,7 +42,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         CriteriaQuery<Person> cq = cb.createQuery(Person.class);
         Root<Person> root = cq.from(Person.class);
         cq.select(root);
-        Query query = currentSession.createQuery(cq);
+        Query<Person> query = currentSession.createQuery(cq);
         return query.getResultList();
     }
 
