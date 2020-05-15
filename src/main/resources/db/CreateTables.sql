@@ -1,21 +1,23 @@
 CREATE TABLE code
 (
-    code_id BIGSERIAL PRIMARY KEY NOT NULL ,
+    code_id SERIAL PRIMARY KEY NOT NULL ,
     char_code CHARACTER VARYING(5),
     description CHARACTER VARYING(255),
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP
 );
 
-CREATE TABLE vacation
+CREATE TABLE absence
 (
     vacation_id BIGSERIAL PRIMARY KEY NOT NULL ,
     date_start TIMESTAMP,
     date_end TIMESTAMP,
     person_id BIGINT,
+    code_id INTEGER,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
+    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    FOREIGN KEY (code_id) REFERENCES code(code_id)
 );
 CREATE TABLE department
 (

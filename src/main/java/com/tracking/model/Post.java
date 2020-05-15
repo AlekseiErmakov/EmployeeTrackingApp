@@ -22,6 +22,6 @@ public class Post extends AbstractEntity{
 
     private String name;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
     private Set<Person> persons = new HashSet<>();
 }

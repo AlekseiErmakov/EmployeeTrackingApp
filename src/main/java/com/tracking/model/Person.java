@@ -40,7 +40,7 @@ public class Person extends AbstractEntity{
     @OneToOne(mappedBy = "person",fetch = FetchType.LAZY)
     private Contact contact;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "post_id")
     private Post post;
 
