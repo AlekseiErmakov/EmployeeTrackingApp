@@ -157,9 +157,16 @@ CREATE TABLE department
     created TIMESTAMP NOT NULL,
     updated TIMESTAMP
 );
-CREATE TABLE person
+
+INSERT INTO department (name,created) VALUES ('Rocket Science Department','2020-05-15');
+INSERT INTO department (name,created) VALUES ('Tesla Department','2020-05-15');
+INSERT INTO department (name,created) VALUES ('HyperLoop Department','2020-05-15');
+INSERT INTO department (name,created) VALUES ('Underground Department','2020-05-15');
+INSERT INTO department (name,created) VALUES ('Social Department','2020-05-15');
+INSERT INTO department (name,created) VALUES ('Game Dev Department','2020-05-15');
+CREATE TABLE employee
 (
-    person_id BIGSERIAL PRIMARY KEY  NOT NULL ,
+    employee_id BIGSERIAL PRIMARY KEY  NOT NULL ,
     num CHARACTER VARYING(30),
     first_name CHARACTER VARYING(30),
     last_name CHARACTER VARYING(30),
@@ -176,11 +183,11 @@ CREATE TABLE absence
     absence_id BIGSERIAL PRIMARY KEY NOT NULL ,
     date_start TIMESTAMP,
     date_end TIMESTAMP,
-    person_id BIGINT,
+    employee_id BIGINT,
     code_id INTEGER,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,
-    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
     FOREIGN KEY (code_id) REFERENCES code(code_id)
 );
 CREATE TABLE contact
@@ -188,10 +195,10 @@ CREATE TABLE contact
     contact_id BIGSERIAL PRIMARY KEY NOT NULL ,
     email CHARACTER VARYING(30),
     phone CHARACTER VARYING(20),
-    person_id BIGINT,
+    employee_id BIGINT,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
 CREATE TABLE address
@@ -201,10 +208,10 @@ CREATE TABLE address
     street CHARACTER VARYING(30),
     house CHARACTER VARYING(10),
     flat INTEGER,
-    person_id BIGINT,
+    employee_id BIGINT,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
 CREATE TABLE post
@@ -215,12 +222,26 @@ CREATE TABLE post
     updated TIMESTAMP
 );
 
-CREATE TABLE person_post
+INSERT INTO post (name, created) VALUES ('Frontend Developer','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Backend Developer','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Devops','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Big Data developer','2020-05-15');
+INSERT INTO post (name, created) VALUES ('QA engineer','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Human resource manager','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Project Manager','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Frontend TeamLead','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Backend Teemlead','2020-05-15');
+INSERT INTO post (name, created) VALUES ('SEO','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Designer','2020-05-15');
+INSERT INTO post (name, created) VALUES ('Project manager','2020-05-15');
+
+
+CREATE TABLE employee_post
 (
-    person_id BIGINT NOT NULL,
+    employee_id BIGINT NOT NULL,
     post_id BIGINT NOT NULL,
-    PRIMARY KEY (person_id,post_id),
-    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    PRIMARY KEY (employee_id,post_id),
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
     FOREIGN KEY (post_id) REFERENCES post(post_id)
 );
 CREATE TABLE worker_day

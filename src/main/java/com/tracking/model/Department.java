@@ -19,11 +19,11 @@ public class Department extends AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "department_id")
-    private Long id;
+    @EqualsAndHashCode.Exclude private Long id;
 
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "department",fetch = FetchType.LAZY)
-    private Set<Person> persons = new HashSet<>();
+    private Set<Employee> employees = new HashSet<>();
 }

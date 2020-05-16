@@ -3,7 +3,6 @@ package com.tracking.repository;
 import com.tracking.config.HibernateConfig;
 import com.tracking.config.WebConfig;
 import com.tracking.model.*;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,13 +22,13 @@ import static org.junit.Assert.assertEquals;
         classes = {HibernateConfig.class, WebConfig.class})
 @WebAppConfiguration
 @Transactional
-public class PersonRepositoryImplTest {
+public class EmployeeRepositoryImplTest {
 
     @Resource
-    private PersonRepository repository;
+    private EmployeeRepository repository;
 
-    private Person aleksey;
-    private Person evgeniia;
+    private Employee aleksey;
+    private Employee evgeniia;
     private Department backend;
     private Post javaDev;
     private Post jsDev;
@@ -58,7 +57,7 @@ public class PersonRepositoryImplTest {
         zhenCon.setEmail("lex_laeda@mail.ru");
         zhenCon.setPhone("+7(911)7494312");
 
-        aleksey = new Person();
+        aleksey = new Employee();
         aleksey.setFirstName("Aleksey");
         aleksey.setLastName("Ermakov");
         aleksey.setBirthday(LocalDate.of(1989,11,30));
@@ -70,7 +69,7 @@ public class PersonRepositoryImplTest {
         aleksey.setNum("8435");
         aleksey.setContact(alexCon);
 
-        evgeniia = new Person();
+        evgeniia = new Employee();
         evgeniia.setFirstName("Evgeniia");
         evgeniia.setLastName("Russkikh");
         evgeniia.setBirthday(LocalDate.of(1993,12,4));
@@ -87,31 +86,31 @@ public class PersonRepositoryImplTest {
     @Test
     public void testSave() {
         repository.save(aleksey);
-        List<Person> all = repository.findAll();
+        List<Employee> all = repository.findAll();
         assertEquals(1,all.size());
     }
 
     @Test
     public void testFindById() {
         repository.save(aleksey);
-        Person person = repository.findAll().get(0);
-        Person byId = repository.findById(person.getId());
-        assertEquals(person,byId);
+        Employee employee = repository.findAll().get(0);
+        Employee byId = repository.findById(employee.getId());
+        assertEquals(employee,byId);
     }
 
     @Test
     public void testFindAll() {
         repository.save(aleksey);
         repository.save(evgeniia);
-        List<Person> all = repository.findAll();
+        List<Employee> all = repository.findAll();
         assertEquals(2,all.size());
     }
 
     @Test
     public void testDeleteById() {
         repository.save(aleksey);
-        Person person = repository.findAll().get(0);
-        Person byId = repository.findById(person.getId());
+        Employee employee = repository.findAll().get(0);
+        Employee byId = repository.findById(employee.getId());
         repository.deleteById(byId.getId());
         assertEquals(0,repository.findAll().size());
     }

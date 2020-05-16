@@ -5,32 +5,32 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "address")
+@Table(name = "absence")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Address extends AbstractEntity{
+public class Absence extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id")
+    @Column(name = "absence_id")
     @EqualsAndHashCode.Exclude private Long id;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "date_start")
+    private LocalDate dateStart;
 
-    @Column(name = "street")
-    private String street;
+    @Column(name = "date_end")
+    private LocalDate dateEnd;
 
-    @Column(name = "house")
-    private String house;
-
-    @Column(name = "flat")
-    private Integer flat;
-
-    @OneToOne(orphanRemoval = true)
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "code_id")
+    private Code code;
+
 }

@@ -17,4 +17,5 @@ public class EmployeeTrackMvcDispatcherServletInitializer extends AbstractAnnota
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
 }

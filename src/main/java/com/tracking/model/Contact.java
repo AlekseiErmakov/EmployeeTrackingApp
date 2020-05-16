@@ -16,7 +16,7 @@ public class Contact extends AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_id")
-    private Long id;
+    @EqualsAndHashCode.Exclude private Long id;
 
     @Column(name = "email")
     private String email;
@@ -25,6 +25,6 @@ public class Contact extends AbstractEntity{
     private String phone;
 
     @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "person_id")
-    private Person person;
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 }

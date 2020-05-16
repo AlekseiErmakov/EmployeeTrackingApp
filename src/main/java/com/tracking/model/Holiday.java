@@ -17,11 +17,12 @@ public class Holiday extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "holiday_weekend_id")
-    private Long id;
+    @EqualsAndHashCode.Exclude private Long id;
 
     @Column(name = "date")
     private LocalDate date;
 
     @ManyToOne
+    @JoinColumn(name = "code_id")
     private Code code;
 }

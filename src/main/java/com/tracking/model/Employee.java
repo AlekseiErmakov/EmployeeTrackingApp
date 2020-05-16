@@ -8,16 +8,16 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "person")
+@Table(name = "employee")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Person extends AbstractEntity{
+public class Employee extends AbstractEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id")
-    private Long id;
+    @Column(name = "employee_id")
+    @EqualsAndHashCode.Exclude private Long id;
 
     @Column(name = "num")
     private String num;
@@ -42,10 +42,10 @@ public class Person extends AbstractEntity{
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToOne(mappedBy = "person",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee",fetch = FetchType.LAZY)
     private Address address;
 
-    @OneToOne(mappedBy = "person",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee",fetch = FetchType.LAZY)
     private Contact contact;
 
     @ManyToOne(cascade = CascadeType.ALL)

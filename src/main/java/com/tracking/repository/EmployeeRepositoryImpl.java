@@ -1,6 +1,6 @@
 package com.tracking.repository;
 
-import com.tracking.model.Person;
+import com.tracking.model.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,44 +13,44 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Service
-public class PersonRepositoryImpl implements PersonRepository {
+public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public PersonRepositoryImpl(SessionFactory sessionFactory) {
+    public EmployeeRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public void save(Person person) {
+    public void save(Employee employee) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.saveOrUpdate(person);
+        currentSession.saveOrUpdate(employee);
     }
 
     @Override
-    public Person findById(Long id) {
+    public Employee findById(Long id) {
         Session currentSession = sessionFactory.getCurrentSession();
-        Person person = currentSession.get(Person.class, id);
-        return person;
+        Employee employee = currentSession.get(Employee.class, id);
+        return employee;
     }
 
     @Override
-    public List<Person> findAll() {
+    public List<Employee> findAll() {
         Session currentSession = sessionFactory.getCurrentSession();
         CriteriaBuilder cb = currentSession.getCriteriaBuilder();
-        CriteriaQuery<Person> cq = cb.createQuery(Person.class);
-        Root<Person> root = cq.from(Person.class);
+        CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
+        Root<Employee> root = cq.from(Employee.class);
         cq.select(root);
-        Query<Person> query = currentSession.createQuery(cq);
+        Query<Employee> query = currentSession.createQuery(cq);
         return query.getResultList();
     }
 
     @Override
     public void deleteById(Long id) {
         Session currentSession = sessionFactory.getCurrentSession();
-        Person person = currentSession.byId(Person.class).load(id);
-        currentSession.delete(person);
+        Employee employee = currentSession.byId(Employee.class).load(id);
+        currentSession.delete(employee);
     }
 
 

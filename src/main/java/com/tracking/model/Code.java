@@ -15,7 +15,7 @@ public class Code extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EqualsAndHashCode.Exclude private Long id;
 
     @Column(name = "char_code")
     private String charCode;

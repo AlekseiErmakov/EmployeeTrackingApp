@@ -18,11 +18,11 @@ public class Post extends AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    private Long id;
+    @EqualsAndHashCode.Exclude private Long id;
 
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
-    private Set<Person> persons = new HashSet<>();
+    private Set<Employee> employees = new HashSet<>();
 }
