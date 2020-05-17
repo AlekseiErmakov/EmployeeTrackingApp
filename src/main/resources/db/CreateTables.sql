@@ -254,5 +254,6 @@ CREATE TABLE worker_day
     updated TIMESTAMP,
     FOREIGN KEY (code_id) references code(code_id),
     FOREIGN KEY (absence_id) references absence(absence_id)
-)
+);
+
 
