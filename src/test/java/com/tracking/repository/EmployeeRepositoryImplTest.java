@@ -65,7 +65,7 @@ public class EmployeeRepositoryImplTest {
         aleksey.setAddress(address);
         aleksey.setDepartment(backend);
         aleksey.setPost(javaDev);
-        aleksey.setSex(Sex.MALE);
+        aleksey.setGender('M');
         aleksey.setNum("8435");
         aleksey.setContact(alexCon);
 
@@ -77,7 +77,7 @@ public class EmployeeRepositoryImplTest {
         evgeniia.setAddress(address);
         evgeniia.setDepartment(backend);
         evgeniia.setPost(jsDev);
-        evgeniia.setSex(Sex.FEMALE);
+        evgeniia.setGender('F');
         evgeniia.setNum("8436");
         evgeniia.setContact(zhenCon);
 

@@ -5,96 +5,122 @@
     <title>Title</title>
 </head>
 <body>
-    <div>
-        <img src="">
-        <input type="file">
-    </div>
-    <div>
+    <!--/*@thymesVar id="employee" type="com.tracking.model.Employee"*/-->
+    <form action="#" th:action="@{/save}" th:object="${employee}"  method="post">
         <div>
-            <label>
-                Имя
-            </label>
-            <input type="text">
+            <img src="">
+            <input type="file">
         </div>
         <div>
-            <label>
-                Фамилия
-            </label>
-            <input type="text">
+            <div>
+                <label>
+                    Имя
+                </label>
+                <input type="text" th:field="*{firstName}">
+            </div>
+            <div>
+                <label>
+                    Фамилия
+                </label>
+                <input type="text" th:field="*{lastName}">
+            </div>
+            <div>
+                <label>
+                    Табельный номер
+                </label>
+                <input type="text" th:field="*{num}">
+            </div>
         </div>
         <div>
-            <label>
-                Табельный номер
-            </label>
-            <input type="text">
-        </div>
-    </div>
-    <div>
-        <div>
-            <label>
-                Дата рождения
-            </label>
-            <input type="date">
-        </div>
-        <div>
-            <label>
-                Пол
-            </label>
-            <select>
-                <option value="Male">М</option>
-                <option value="Female">Ж</option>
-            </select>
-        </div>
-        <div>
-            <label>
-                Должность
-            </label>
-            <select>
-            </select>
-        </div>
-        <div>
-            <input type="checkbox"> Удаленка
-        </div>
-    </div>
-    <div>
-        <div>
-            <label>
-                Город
-            </label>
-            <input type="text">
-        </div>
-        <div>
-            <label>
-                Улица
-            </label>
-            <input type="text">
-        </div>
-        <div>
-            <label>
-                Дом
-            </label>
-            <input type="text">
+            <div>
+                <label>
+                    Дата рождения
+                </label>
+                <input type="date" th:field="*{birthday}">
+            </div>
+            <div>
+                <label>
+                    Пол
+                </label>
+                <select th:field="*{gender}">
+                    <option th:value="'M'" th:text="Male">М</option>
+                    <option th:value="'F'" th:text="Female">Ж</option>
+                </select>
+            </div>
+            <div>
+                <label>
+                    Департамент
+                </label>
+                <select th:field="*{department}">
+                    <option value=""> -- </option>
+                    <!--/*@thymesVar id="departments" type="com.tracking.model.Department"*/-->
+                    <!--/*@thymesVar id="name" type="com.tracking.model"*/-->
+                    <option th:each="department : ${departments}"
+                            th:value="department"
+                            th:utext="${department.name}">
+
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label>
+                    Должность
+                </label>
+                <select th:field="*{post}">
+                    <option value=""> -- </option>
+                    <!--/*@thymesVar id="departments" type="com.tracking.model.Department"*/-->
+                    <!--/*@thymesVar id="name" type="com.tracking.model"*/-->
+                    <option th:each="post : ${posts}"
+                            th:value="post"
+                            th:utext="${post.name}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <input type="checkbox"> Удаленка
+            </div>
         </div>
         <div>
-            <label>
-                Квартира
-            </label>
-            <input type="text">
+            <div>
+                <label>
+                    Город
+                </label>
+                <input type="text">
+            </div>
+            <div>
+                <label>
+                    Улица
+                </label>
+                <input type="text">
+            </div>
+            <div>
+                <label>
+                    Дом
+                </label>
+                <input type="text">
+            </div>
+            <div>
+                <label>
+                    Квартира
+                </label>
+                <input type="text">
+            </div>
         </div>
-    </div>
-    <div>
         <div>
-            <label>
-                Email
-            </label>
-            <input type="email">
+            <div>
+                <label>
+                    Email
+                </label>
+                <input type="email">
+            </div>
+            <div>
+                <label>
+                    Мобильный телефон
+                </label>
+                <input type="tel">
+            </div>
         </div>
-        <div>
-            <label>
-                Мобильный телефон
-            </label>
-            <input type="tel">
-        </div>
-    </div>
+    </form>
+
 </body>
 </html>

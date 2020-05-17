@@ -171,7 +171,7 @@ CREATE TABLE employee
     first_name CHARACTER VARYING(30),
     last_name CHARACTER VARYING(30),
     birthday TIMESTAMP,
-    sex CHARACTER VARYING(30),
+    gender CHARACTER VARYING(30),
     is_remote BOOLEAN,
     department_id BIGINT,
     created TIMESTAMP NOT NULL ,

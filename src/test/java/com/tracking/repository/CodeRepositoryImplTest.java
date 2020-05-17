@@ -27,6 +27,7 @@ public class CodeRepositoryImplTest {
     private CodeRepository codeRepository;
 
     private Code code;
+
     @Before
     public void setUp() throws Exception {
         code = new Code();
@@ -36,31 +37,31 @@ public class CodeRepositoryImplTest {
 
     @Test
     public void testFindCodeById() {
-        codeRepository.saveCode(code);
+        codeRepository.save(code);
         Code codeFromDb = codeRepository.findAll().get(0);
-        Code codeById = codeRepository.findCodeById(codeFromDb.getId());
+        Code codeById = codeRepository.findById(codeFromDb.getId());
         assertEquals(code,codeById);
     }
 
     @Test
     public void testSaveCode() {
-        codeRepository.saveCode(code);
+        codeRepository.save(code);
         List<Code> all = codeRepository.findAll();
         assertEquals(1,all.size());
     }
 
     @Test
     public void testDeleteCodeById() {
-        codeRepository.saveCode(code);
+        codeRepository.save(code);
         Code code = codeRepository.findAll().get(0);
-        codeRepository.deleteCodeById(code.getId());
+        codeRepository.deleteById(code.getId());
         List<Code> all = codeRepository.findAll();
         assertEquals(0,all.size());
     }
 
     @Test
     public void testFindAll() {
-        codeRepository.saveCode(code);
+        codeRepository.save(code);
         List<Code> all = codeRepository.findAll();
         assertEquals(1,all.size());
     }

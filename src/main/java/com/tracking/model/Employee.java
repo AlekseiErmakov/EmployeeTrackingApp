@@ -31,9 +31,8 @@ public class Employee extends AbstractEntity{
     @Column(name = "birthday")
     private LocalDate birthday;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "sex")
-    private Sex sex;
+    @Column(name = "gender")
+    private Character gender;
 
     @Column(name = "is_remote")
     private Boolean isRemote;

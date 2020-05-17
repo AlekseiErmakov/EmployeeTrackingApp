@@ -1,5 +1,5 @@
 package com.tracking.model;
 
-public enum Sex {
+public enum Gender {
     MALE,FEMALE
 }

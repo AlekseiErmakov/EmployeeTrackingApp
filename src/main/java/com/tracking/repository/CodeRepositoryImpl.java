@@ -22,20 +22,20 @@ public class CodeRepositoryImpl implements CodeRepository{
     }
 
     @Override
-    public Code findCodeById(Long id) {
+    public Code findById(Long id) {
         Session currentSession = sessionFactory.getCurrentSession();
         Code code = currentSession.get(Code.class, id);
         return code;
     }
 
     @Override
-    public void saveCode(Code code) {
+    public void save(Code code) {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.saveOrUpdate(code);
     }
 
     @Override
-    public void deleteCodeById(Long id) {
+    public void deleteById(Long id) {
         Session currentSession = sessionFactory.getCurrentSession();
         Code load = currentSession.byId(Code.class).load(id);
         currentSession.delete(load);
