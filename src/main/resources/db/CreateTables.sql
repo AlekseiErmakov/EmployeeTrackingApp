@@ -207,7 +207,7 @@ CREATE TABLE address
     city CHARACTER VARYING(30),
     street CHARACTER VARYING(30),
     house CHARACTER VARYING(10),
-    flat INTEGER,
+    flat CHARACTER VARYING(10),
     employee_id BIGINT,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,

@@ -47,7 +47,7 @@ public class EmployeeRepositoryImplTest {
         address.setCity("Saint-Petersburg");
         address.setStreet("Stachek");
         address.setHouse("26");
-        address.setFlat(12);
+
 
         Contact alexCon = new Contact();
         alexCon.setEmail("lex_laeda@mail.ru");

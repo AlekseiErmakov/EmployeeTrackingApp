@@ -28,9 +28,20 @@ public class Address extends AbstractEntity{
     private String house;
 
     @Column(name = "flat")
-    private Integer flat;
+    private String flat;
 
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", house='" + house + '\'' +
+                ", flat=" + flat +
+                '}';
+    }
 }

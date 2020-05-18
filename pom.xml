@@ -24,6 +24,7 @@
     <lombok.version>1.18.12</lombok.version>
     <junit.version>4.12</junit.version>
     <mockito.version>1.10.19</mockito.version>
+    <model.map.version>2.3.0</model.map.version>
   </properties>
 
   <dependencies>
@@ -78,6 +79,11 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>${javaxservlet.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>${model.map.version}</version>
     </dependency>
     <dependency>
       <groupId>org.postgresql</groupId>

@@ -27,4 +27,13 @@ public class Contact extends AbstractEntity{
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

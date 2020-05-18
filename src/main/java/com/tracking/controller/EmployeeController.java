@@ -1,8 +1,8 @@
 package com.tracking.controller;
 
-import com.tracking.model.Department;
-import com.tracking.model.Employee;
-import com.tracking.model.Post;
+import com.tracking.dto.EmployeeDto;
+import com.tracking.mapper.EmployeeMapper;
+import com.tracking.model.*;
 import com.tracking.service.DepartmentService;
 import com.tracking.service.EmployeeService;
 import com.tracking.service.PostService;
@@ -23,12 +23,14 @@ public class EmployeeController {
     private DepartmentService departmentService;
     private PostService postService;
     private EmployeeService employeeService;
+    private EmployeeMapper mapper;
 
     @Autowired
-    public EmployeeController(DepartmentService departmentService, PostService postService, EmployeeService employeeService) {
+    public EmployeeController(DepartmentService departmentService, PostService postService, EmployeeService employeeService, EmployeeMapper mapper) {
         this.departmentService = departmentService;
         this.postService = postService;
         this.employeeService = employeeService;
+        this.mapper = mapper;
     }
 
     @GetMapping("/all")
@@ -38,14 +40,20 @@ public class EmployeeController {
 
     @GetMapping("/new")
     public String addNewEmployee(Model model) {
-        Employee employee = new Employee();
-        model.addAttribute("employee",employee);
+
+        EmployeeDto employeeDto = new EmployeeDto();
+
+        model.addAttribute(employeeDto);
         return "employee_form";
     }
 
     @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-        return "redirect/";
+    public String saveEmployee(@ModelAttribute("employeeDto") EmployeeDto employeeDto) {
+
+        Employee employee = mapper.toEntity(employeeDto);
+        System.out.println(employee.getDepartment().getName());
+        employeeService.save(employee);
+        return "redirect:all";
     }
 
     @ModelAttribute("departments")
