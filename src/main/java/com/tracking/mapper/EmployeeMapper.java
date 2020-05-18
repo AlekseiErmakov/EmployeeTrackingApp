@@ -1,9 +1,7 @@
 package com.tracking.mapper;
 
 import com.tracking.dto.EmployeeDto;
-import com.tracking.model.Department;
-import com.tracking.model.Employee;
-import com.tracking.model.Post;
+import com.tracking.model.*;
 import com.tracking.service.DepartmentService;
 import com.tracking.service.PostService;
 import org.modelmapper.ModelMapper;
@@ -42,6 +40,12 @@ public class EmployeeMapper extends AbstractMapper<Employee, EmployeeDto> {
         destination.setDepartment(department);
         Post post = postService.findById(source.getPostId());
         destination.setPost(post);
+        Address address = source.getAddress();
+        address.setEmployee(destination);
+        destination.setAddress(address);
+        Contact contact = source.getContact();
+        contact.setEmployee(destination);
+        destination.setContact(contact);
     }
 
     @Override

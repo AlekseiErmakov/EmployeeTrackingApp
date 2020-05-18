@@ -34,6 +34,11 @@ public class Address extends AbstractEntity{
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    public String getFullAddress(){
+        return "г." + city + " ул. " + street +
+                " дом. " + house + " кв" + flat;
+
+    }
     @Override
     public String toString() {
         return "Address{" +

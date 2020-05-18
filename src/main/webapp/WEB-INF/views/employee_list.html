@@ -21,11 +21,15 @@
             <a class="btn btn-primary">Редактировать</a>
             <a class="btn btn-primary">Удалить</a>
         </div>
+        <select >
+            <!--/*@thymesVar id="employee" type="com.tracking.model.Employee"*/-->
+            <option th:each="employee : ${employees}"
+                    th:utext="${employee.firstName}"></option>
+        </select>
         <div class="mb-4 mt-4">
             <table class="table text-center">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Фото</th>
                     <th>Табельный номер</th>
                     <th>Имя</th>
                     <th>Фамилия</th>
@@ -37,41 +41,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                </tr>
-                <tr>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                </tr>
-                <tr>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
-                    <td>Должность</td>
+                <!--/*@thymesVar id="employees" type="com.tracking.model.Employee"*/-->
+                <tr th:each="employee : ${employees}">
+                    <td th:utext="${employee.num}"></td>
+                    <td th:utext="${employee.firstName}"></td>
+                    <td th:utext="${employee.lastName}"></td>
+                    <td th:utext="${employee.birthday}"></td>
+                    <td th:utext="${employee.getAge()}"></td>
+                    <td th:utext="${employee.post.name}"></td>
+                    <td th:utext="${employee.getIsRemoteDescription()}"></td>
+                    <td th:utext="${employee.address.getFullAddress()}"></td>
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 </body>

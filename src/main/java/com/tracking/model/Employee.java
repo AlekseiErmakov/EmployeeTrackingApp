@@ -41,14 +41,22 @@ public class Employee extends AbstractEntity{
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToOne(mappedBy = "employee",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne(mappedBy = "employee",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Contact contact;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private Post post;
 
+    public String getIsRemoteDescription(){
+        return isRemote ? "Удаленная работа" : "Работа в офисе";
+    }
+    public Integer getAge(){
+        LocalDate now = LocalDate.now();
+        int yearDif = now.getYear() - birthday.getYear();
+        return now.getDayOfYear() - birthday.getDayOfYear() >= 0 ? yearDif : ++yearDif;
+    }
 }

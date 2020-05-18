@@ -40,18 +40,14 @@ public class EmployeeController {
 
     @GetMapping("/new")
     public String addNewEmployee(Model model) {
-
         EmployeeDto employeeDto = new EmployeeDto();
-
         model.addAttribute(employeeDto);
         return "employee_form";
     }
 
     @PostMapping("/save")
     public String saveEmployee(@ModelAttribute("employeeDto") EmployeeDto employeeDto) {
-
         Employee employee = mapper.toEntity(employeeDto);
-        System.out.println(employee.getDepartment().getName());
         employeeService.save(employee);
         return "redirect:all";
     }
@@ -64,5 +60,15 @@ public class EmployeeController {
     @ModelAttribute("posts")
     public List<Post> getPosts() {
         return this.postService.findAll();
+
+    }
+    @ModelAttribute("employees")
+    public List<Employee> getEmployees(){
+        List<Employee> all = this.employeeService.findAll();
+        for (Employee employee : all){
+            Address address = employee.getAddress();
+            System.out.println(address);
+        }
+        return all;
     }
 }
