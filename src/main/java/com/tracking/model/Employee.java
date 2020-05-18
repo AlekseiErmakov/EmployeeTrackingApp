@@ -54,9 +54,9 @@ public class Employee extends AbstractEntity{
     public String getIsRemoteDescription(){
         return isRemote ? "Удаленная работа" : "Работа в офисе";
     }
-    public Integer getAge(){
+    public int getAge(){
         LocalDate now = LocalDate.now();
         int yearDif = now.getYear() - birthday.getYear();
-        return now.getDayOfYear() - birthday.getDayOfYear() >= 0 ? yearDif : ++yearDif;
+        return now.getDayOfYear() - birthday.getDayOfYear() >= 0 ? --yearDif : yearDif;
     }
 }

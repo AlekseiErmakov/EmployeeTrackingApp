@@ -35,8 +35,8 @@ public class Address extends AbstractEntity{
     private Employee employee;
 
     public String getFullAddress(){
-        return "г." + city + " ул. " + street +
-                " дом. " + house + " кв" + flat;
+        return "г. " + city + " ул. " + street +
+                " д. " + house + " кв. " + flat;
 
     }
     @Override
