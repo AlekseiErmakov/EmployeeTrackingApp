@@ -1,6 +1,6 @@
 package com.tracking.repository;
 
-import com.tracking.model.Employee;
+import com.tracking.model.employee.Employee;
 
 import java.util.List;
 

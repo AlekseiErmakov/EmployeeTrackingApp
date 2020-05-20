@@ -1,6 +1,6 @@
 package com.tracking.service;
 
-import com.tracking.model.Absence;
+import com.tracking.model.tabel.Absence;
 import com.tracking.repository.AbsenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

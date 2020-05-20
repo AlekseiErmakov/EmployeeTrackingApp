@@ -1,5 +1,6 @@
-package com.tracking.model;
+package com.tracking.model.tabel;
 
+import com.tracking.model.employee.Employee;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

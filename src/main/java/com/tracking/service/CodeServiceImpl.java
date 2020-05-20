@@ -1,6 +1,6 @@
 package com.tracking.service;
 
-import com.tracking.model.Code;
+import com.tracking.model.tabel.Code;
 import com.tracking.repository.CodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

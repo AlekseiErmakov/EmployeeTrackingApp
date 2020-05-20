@@ -1,4 +1,4 @@
-package com.tracking.model;
+package com.tracking.model.tabel;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

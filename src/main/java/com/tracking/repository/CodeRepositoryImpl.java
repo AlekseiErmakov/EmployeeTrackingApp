@@ -1,6 +1,6 @@
 package com.tracking.repository;
 
-import com.tracking.model.Code;
+import com.tracking.model.tabel.Code;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

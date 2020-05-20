@@ -1,7 +1,7 @@
 package com.tracking.repository;
 
-import com.tracking.model.Absence;
-import com.tracking.model.Employee;
+import com.tracking.model.tabel.Absence;
+import com.tracking.model.employee.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

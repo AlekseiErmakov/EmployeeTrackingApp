@@ -1,6 +1,6 @@
 package com.tracking.repository;
 
-import com.tracking.model.Employee;
+import com.tracking.model.employee.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

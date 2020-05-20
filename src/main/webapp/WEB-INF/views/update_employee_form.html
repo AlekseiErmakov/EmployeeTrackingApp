@@ -14,7 +14,7 @@
         Личная карточка сотрудника
     </h1>
     <!--/*@thymesVar id="employeeDto" type="com.tracking.dto.EmployeeDto"*/-->
-    <form action="#" th:action="@{/save}" th:object="${employeeDto}" method="post">
+    <form action="#" th:action="@{/update/{id}(id=${employeeDto.id})}" th:object="${employeeDto}" method="post">
         <div class="row justify-content-end">
             <div class="col-md-4 mt-5">
                 <img src="">
@@ -44,7 +44,7 @@
                     <label>
                         Пол
                     </label>
-                    <select class="form-control" th:field="*{gender}" required>
+                    <select class="form-control" th:field="*{gender}">
                         <option th:value="'М'">М</option>
                         <option th:value="'Ж'">Ж</option>
                     </select>
@@ -107,7 +107,7 @@
                     <label>
                         Департамент
                     </label>
-                    <select class="form-control" th:field="*{departmentId}" required>
+                    <select class="form-control" th:field="*{departmentId}">
                         <option value="" > -- </option>
                         <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
                         <!--/*@thymesVar id="name" type="com.tracking.model"*/-->
@@ -136,13 +136,13 @@
                     <label>
                         Email
                     </label>
-                    <input class="form-control" type="email" th:field="*{contact.email}" required>
+                    <input class="form-control" type="email" th:field="*{contact.email}">
                 </div>
                 <div class="form-group">
                     <label>
                         Мобильный телефон
                     </label>
-                    <input class="form-control" type="tel" th:field="*{contact.phone}" required>
+                    <input class="form-control" type="tel" th:field="*{contact.phone}">
                 </div>
             </div>
         </div>

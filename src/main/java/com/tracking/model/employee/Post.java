@@ -1,6 +1,6 @@
-package com.tracking.model;
+package com.tracking.model.employee;
 
-
+import com.tracking.model.tabel.AbstractEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,20 +10,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "department")
-@Setter
+@Table(name = "post")
 @Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
-public class Department extends AbstractEntity{
+public class Post extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "department_id")
+    @Column(name = "post_id")
     @EqualsAndHashCode.Exclude private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "department",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
     private Set<Employee> employees = new HashSet<>();
 }

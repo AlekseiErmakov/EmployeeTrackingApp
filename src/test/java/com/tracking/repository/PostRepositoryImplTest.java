@@ -2,7 +2,7 @@ package com.tracking.repository;
 
 import com.tracking.config.HibernateConfig;
 import com.tracking.config.WebConfig;
-import com.tracking.model.Post;
+import com.tracking.model.employee.Post;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

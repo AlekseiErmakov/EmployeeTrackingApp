@@ -1,15 +1,14 @@
-package com.tracking.model;
+package com.tracking.dto;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.time.Month;
 
 import static org.junit.Assert.*;
 
-public class EmployeeTest {
-    private Employee employee;
+public class EmployeeDtoTest {
+    private EmployeeDto employee;
 
     private LocalDate birthDayOne;
     private LocalDate birthDayTwo;
@@ -19,10 +18,7 @@ public class EmployeeTest {
 
     @Before
     public void setUp() throws Exception {
-        employee = new Employee();
-        Month month = now.getMonth();
-
-
+        employee = new EmployeeDto();
     }
 
     @Test
@@ -45,7 +41,6 @@ public class EmployeeTest {
         yearDiff--;
         assertEquals(yearDiff,employee.getAge());
     }
-
     @Test
     public void testGetAgeNow(){
         birthDayTwo = LocalDate.of(1989,now.getMonth().getValue(),now.getDayOfMonth());

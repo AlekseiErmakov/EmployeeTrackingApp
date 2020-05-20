@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS code,holiday_weekend,department,post,employee,employee_post,absence,address,contact,employee_day CASCADE ;
+
 CREATE TABLE code
 (
     code_id SERIAL PRIMARY KEY NOT NULL ,
@@ -23,11 +25,11 @@ INSERT INTO code (char_code, description, created) VALUES ('Ож','Отпуск 
 
 CREATE TABLE holiday_weekend
 (
-      holiday_weekend_id SERIAL PRIMARY KEY NOT NULL ,
-      date TIMESTAMP,
-      code_id INTEGER,
-      created TIMESTAMP NOT NULL ,
-      updated TIMESTAMP
+    holiday_weekend_id SERIAL PRIMARY KEY NOT NULL ,
+    date TIMESTAMP,
+    code_id INTEGER,
+    created TIMESTAMP NOT NULL ,
+    updated TIMESTAMP
 );
 INSERT INTO holiday_weekend (date,code_id,created) VALUES ('2020-01-01',3,'2020-05-15');
 INSERT INTO holiday_weekend (date,code_id,created) VALUES ('2020-01-02',3,'2020-05-15');
@@ -164,6 +166,33 @@ INSERT INTO department (name,created) VALUES ('HyperLoop Department','2020-05-15
 INSERT INTO department (name,created) VALUES ('Underground Department','2020-05-15');
 INSERT INTO department (name,created) VALUES ('Social Department','2020-05-15');
 INSERT INTO department (name,created) VALUES ('Game Dev Department','2020-05-15');
+
+CREATE TABLE contact
+(
+    contact_id BIGSERIAL PRIMARY KEY NOT NULL ,
+    email CHARACTER VARYING(30),
+    phone CHARACTER VARYING(20),
+    created TIMESTAMP NOT NULL ,
+    updated TIMESTAMP
+);
+
+CREATE TABLE address
+(
+    address_id BIGSERIAL PRIMARY KEY NOT NULL ,
+    city CHARACTER VARYING(30),
+    street CHARACTER VARYING(30),
+    house CHARACTER VARYING(10),
+    flat CHARACTER VARYING(10),
+    created TIMESTAMP NOT NULL ,
+    updated TIMESTAMP
+);
+CREATE TABLE post
+(
+    post_id BIGSERIAL PRIMARY KEY NOT NULL ,
+    name CHARACTER VARYING(30),
+    created TIMESTAMP NOT NULL ,
+    updated TIMESTAMP
+);
 CREATE TABLE employee
 (
     employee_id BIGSERIAL PRIMARY KEY  NOT NULL ,
@@ -173,9 +202,13 @@ CREATE TABLE employee
     birthday TIMESTAMP,
     gender CHARACTER VARYING(30),
     is_remote BOOLEAN,
+    address_id BIGINT,
+    contact_id BIGINT,
     department_id BIGINT,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,
+    FOREIGN KEY (address_id) REFERENCES address(address_id),
+    FOREIGN KEY (contact_id) REFERENCES contact(contact_id),
     FOREIGN KEY (department_id) REFERENCES department(department_id)
 );
 CREATE TABLE absence
@@ -190,37 +223,7 @@ CREATE TABLE absence
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
     FOREIGN KEY (code_id) REFERENCES code(code_id)
 );
-CREATE TABLE contact
-(
-    contact_id BIGSERIAL PRIMARY KEY NOT NULL ,
-    email CHARACTER VARYING(30),
-    phone CHARACTER VARYING(20),
-    employee_id BIGINT,
-    created TIMESTAMP NOT NULL ,
-    updated TIMESTAMP,
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-);
 
-CREATE TABLE address
-(
-    address_id BIGSERIAL PRIMARY KEY NOT NULL ,
-    city CHARACTER VARYING(30),
-    street CHARACTER VARYING(30),
-    house CHARACTER VARYING(10),
-    flat CHARACTER VARYING(10),
-    employee_id BIGINT,
-    created TIMESTAMP NOT NULL ,
-    updated TIMESTAMP,
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-);
-
-CREATE TABLE post
-(
-    post_id BIGSERIAL PRIMARY KEY NOT NULL ,
-    name CHARACTER VARYING(30),
-    created TIMESTAMP NOT NULL ,
-    updated TIMESTAMP
-);
 
 INSERT INTO post (name, created) VALUES ('Frontend Developer','2020-05-15');
 INSERT INTO post (name, created) VALUES ('Backend Developer','2020-05-15');
@@ -244,16 +247,13 @@ CREATE TABLE employee_post
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
     FOREIGN KEY (post_id) REFERENCES post(post_id)
 );
-CREATE TABLE worker_day
+CREATE TABLE employee_day
 (
     worker_day_id BIGSERIAL PRIMARY KEY ,
     date TIMESTAMP,
     code_id INTEGER,
-    absence_id INTEGER,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,
-    FOREIGN KEY (code_id) references code(code_id),
-    FOREIGN KEY (absence_id) references absence(absence_id)
+    FOREIGN KEY (code_id) references code(code_id)
 );
-
 

@@ -1,7 +1,7 @@
 package com.tracking.dto;
 
-import com.tracking.model.Address;
-import com.tracking.model.Contact;
+import com.tracking.model.employee.Address;
+import com.tracking.model.employee.Contact;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,4 +32,20 @@ public class EmployeeDto extends AbstractDto {
     private Long departmentId;
 
     private Long postId;
+
+    private String postName;
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
+    public String getIsRemoteDescription() {
+        return isRemote ? "Удаленная работа" : "Работа в офисе";
+    }
+
+    public int getAge() {
+        LocalDate now = LocalDate.now();
+        int yearDif = now.getYear() - birthday.getYear();
+        return now.getDayOfYear() - birthday.getDayOfYear() >= 0 ? yearDif : --yearDif;
+    }
 }

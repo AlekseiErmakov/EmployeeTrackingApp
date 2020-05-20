@@ -1,6 +1,6 @@
 package com.tracking.service;
 
-import com.tracking.model.Employee;
+import com.tracking.model.employee.Employee;
 
 import java.util.List;
 
@@ -9,4 +9,8 @@ public interface EmployeeService {
     Employee findById(Long id);
     List<Employee> findAll();
     void deleteById(Long id);
+
+    List<String> findAllNums();
+
+    boolean containsNum(String num);
 }

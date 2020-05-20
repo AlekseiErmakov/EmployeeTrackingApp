@@ -1,12 +1,14 @@
 package com.tracking.service;
 
-import com.tracking.model.Employee;
+import com.tracking.model.employee.Employee;
 import com.tracking.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -39,5 +41,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void deleteById(Long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public List<String> findAllNums() {
+        return this.repository.findAll().stream()
+                .map(Employee::getNum)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public boolean containsNum(String num) {
+        return findAllNums().stream().anyMatch(dbNum->dbNum.equalsIgnoreCase(num));
     }
 }

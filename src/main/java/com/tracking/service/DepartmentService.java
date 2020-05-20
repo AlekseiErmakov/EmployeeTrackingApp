@@ -1,6 +1,6 @@
 package com.tracking.service;
 
-import com.tracking.model.Department;
+import com.tracking.model.employee.Department;
 
 import java.util.List;
 

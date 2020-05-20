@@ -2,58 +2,91 @@ package com.tracking.controller;
 
 import com.tracking.dto.EmployeeDto;
 import com.tracking.mapper.EmployeeMapper;
-import com.tracking.model.*;
+import com.tracking.model.employee.Department;
+import com.tracking.model.employee.Employee;
+import com.tracking.model.employee.Post;
 import com.tracking.service.DepartmentService;
 import com.tracking.service.EmployeeService;
 import com.tracking.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/employee")
 public class EmployeeController {
 
+    private EmployeeService employeeService;
     private DepartmentService departmentService;
     private PostService postService;
-    private EmployeeService employeeService;
-    private EmployeeMapper mapper;
+    private EmployeeMapper employeeMapper;
 
-    @Autowired
-    public EmployeeController(DepartmentService departmentService, PostService postService, EmployeeService employeeService, EmployeeMapper mapper) {
+
+    public EmployeeController(EmployeeService employeeService, DepartmentService departmentService,
+                              PostService postService, EmployeeMapper employeeMapper) {
+        this.employeeService = employeeService;
         this.departmentService = departmentService;
         this.postService = postService;
-        this.employeeService = employeeService;
-        this.mapper = mapper;
+        this.employeeMapper = employeeMapper;
+
     }
 
-    @GetMapping("/all")
-    public String showEmployees() {
-        return "/employee_list";
+    @GetMapping("")
+    public String redirectToList() {
+        return "redirect:/list";
     }
 
     @GetMapping("/new")
-    public String addNewEmployee(Model model) {
-        EmployeeDto employeeDto = new EmployeeDto();
-        model.addAttribute(employeeDto);
+    public String getEmployeeForm(EmployeeDto employeeDto) {
         return "employee_form";
     }
 
     @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("employeeDto") EmployeeDto employeeDto) {
-        Employee employee = mapper.toEntity(employeeDto);
+    public String saveNewEmployee(EmployeeDto employeeDto) {
+
+        if (employeeService.containsNum(employeeDto.getNum())) {
+            employeeDto.setNum("Работник с таким номером уже существует");
+            return "employee_form";
+        }
+        Employee employee = employeeMapper.toEntity(employeeDto);
         employeeService.save(employee);
-        return "redirect:all";
+        return "redirect:/list";
+    }
+
+    @GetMapping("/list")
+    public String getEmployeeList() {
+        return "employee_list";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getEmployeeById(@PathVariable("id") Long id, Model model) {
+        Employee update = employeeService.findById(id);
+        EmployeeDto employeeDto = employeeMapper.toDto(update);
+        model.addAttribute("employeeDto", employeeDto);
+        return "update_employee_form";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateEmployee(@PathVariable("id") Long id, EmployeeDto employeeDto) {
+        Employee employee = employeeMapper.toEntity(employeeDto);
+        employee.setId(id);
+        employeeService.save(employee);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        this.employeeService.deleteById(id);
+        return "redirect:/list";
     }
 
     @ModelAttribute("departments")
-    public List<Department> getDepatments(){
+    public List<Department> getDepartments() {
         return this.departmentService.findAll();
     }
 
@@ -62,13 +95,12 @@ public class EmployeeController {
         return this.postService.findAll();
 
     }
+
     @ModelAttribute("employees")
-    public List<Employee> getEmployees(){
-        List<Employee> all = this.employeeService.findAll();
-        for (Employee employee : all){
-            Address address = employee.getAddress();
-            System.out.println(address);
-        }
-        return all;
+    public List<EmployeeDto> getEmployees() {
+        return this.employeeService.findAll().stream()
+                .map(employee -> employeeMapper.toDto(employee))
+                .collect(Collectors.toList());
     }
+
 }

@@ -1,5 +1,6 @@
-package com.tracking.model;
+package com.tracking.model.employee;
 
+import com.tracking.model.tabel.AbstractEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Address extends AbstractEntity{
+public class Address extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +31,7 @@ public class Address extends AbstractEntity{
     @Column(name = "flat")
     private String flat;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "employee_id")
+    @OneToOne(orphanRemoval = true, mappedBy = "address")
     private Employee employee;
 
     public String getFullAddress(){

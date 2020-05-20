@@ -1,7 +1,6 @@
 package com.tracking.repository;
 
-import com.tracking.model.Department;
-import com.tracking.model.Post;
+import com.tracking.model.employee.Department;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

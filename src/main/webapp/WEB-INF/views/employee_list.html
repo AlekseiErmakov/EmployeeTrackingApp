@@ -17,15 +17,10 @@
             </div>
         </div>
         <div class="mb-4">
-            <a href="/employee/new" class="btn btn-primary">Добавить</a>
+            <a href="/new" class="btn btn-primary">Добавить</a>
             <a class="btn btn-primary">Редактировать</a>
             <a class="btn btn-primary">Удалить</a>
         </div>
-        <select >
-            <!--/*@thymesVar id="employee" type="com.tracking.model.Employee"*/-->
-            <option th:each="employee : ${employees}"
-                    th:utext="${employee.firstName}"></option>
-        </select>
         <div class="mb-4 mt-4">
             <table class="table text-center">
                 <thead class="thead-dark">
@@ -38,23 +33,30 @@
                     <th>Должность</th>
                     <th>Удаленная работа</th>
                     <th>Адрес проживания</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <!--/*@thymesVar id="employees" type="com.tracking.model.Employee"*/-->
+                <!--/*@thymesVar id="employees" type="com.tracking.model.employee.Employee"*/-->
                 <tr th:each="employee : ${employees}">
                     <td th:utext="${employee.num}"></td>
                     <td th:utext="${employee.firstName}"></td>
                     <td th:utext="${employee.lastName}"></td>
                     <td th:utext="${employee.birthday}"></td>
                     <td th:utext="${employee.getAge()}"></td>
-                    <td th:utext="${employee.post.name}"></td>
+                    <td th:utext="${employee.postName}"></td>
                     <td th:utext="${employee.getIsRemoteDescription()}"></td>
                     <td th:utext="${employee.address.getFullAddress()}"></td>
+                    <td>
+                        <a th:href="@{/update/{id}(id=${employee.id})}">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/delete/{id}(id=${employee.id})}">Delete</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 </body>
