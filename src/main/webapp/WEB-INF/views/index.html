@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Psge</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-6" >
+        <h1> Главная страница</h1>
+        <a th:href="@{/login}">Войти</a>
+        <a th:href="@{/registration}">Зарегистрироваться</a>
+        <div sec:authorize="hasRole('ROLE_USER')">
+            <a th:href="@{/employee/list}">Список сотридников</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
+            <h4><a href="/logout">Выйти</a></h4>
+        </div>
+    </div>
+</body>
+</html>

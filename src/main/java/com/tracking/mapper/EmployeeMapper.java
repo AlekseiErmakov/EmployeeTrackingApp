@@ -2,8 +2,8 @@ package com.tracking.mapper;
 
 import com.tracking.dto.EmployeeDto;
 import com.tracking.model.employee.*;
-import com.tracking.service.DepartmentService;
-import com.tracking.service.PostService;
+import com.tracking.service.employee.DepartmentService;
+import com.tracking.service.employee.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

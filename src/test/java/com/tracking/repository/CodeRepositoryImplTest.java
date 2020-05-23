@@ -3,6 +3,7 @@ package com.tracking.repository;
 import com.tracking.config.HibernateConfig;
 import com.tracking.config.WebConfig;
 import com.tracking.model.tabel.Code;
+import com.tracking.repository.tabel.CodeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

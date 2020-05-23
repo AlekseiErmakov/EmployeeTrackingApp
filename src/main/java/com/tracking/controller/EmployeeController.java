@@ -5,20 +5,18 @@ import com.tracking.mapper.EmployeeMapper;
 import com.tracking.model.employee.Department;
 import com.tracking.model.employee.Employee;
 import com.tracking.model.employee.Post;
-import com.tracking.service.DepartmentService;
-import com.tracking.service.EmployeeService;
-import com.tracking.service.PostService;
+import com.tracking.service.employee.DepartmentService;
+import com.tracking.service.employee.EmployeeService;
+import com.tracking.service.employee.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("employee")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -36,10 +34,6 @@ public class EmployeeController {
 
     }
 
-    @GetMapping("")
-    public String redirectToList() {
-        return "redirect:/list";
-    }
 
     @GetMapping("/new")
     public String getEmployeeForm(EmployeeDto employeeDto) {
@@ -55,7 +49,7 @@ public class EmployeeController {
         }
         Employee employee = employeeMapper.toEntity(employeeDto);
         employeeService.save(employee);
-        return "redirect:/list";
+        return "redirect:/employee/list";
     }
 
     @GetMapping("/list")
@@ -76,13 +70,13 @@ public class EmployeeController {
         Employee employee = employeeMapper.toEntity(employeeDto);
         employee.setId(id);
         employeeService.save(employee);
-        return "redirect:/list";
+        return "redirect:/employee/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         this.employeeService.deleteById(id);
-        return "redirect:/list";
+        return "redirect:/employee/list";
     }
 
     @ModelAttribute("departments")

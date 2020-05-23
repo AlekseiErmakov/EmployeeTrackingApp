@@ -3,11 +3,13 @@ package com.tracking.dto;
 import com.tracking.model.employee.Address;
 import com.tracking.model.employee.Contact;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class EmployeeDto extends AbstractDto {
 
     private Long id;

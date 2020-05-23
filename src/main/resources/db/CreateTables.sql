@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS code,holiday_weekend,department,post,employee,employee_post,absence,address,contact,employee_day CASCADE ;
+DROP TABLE IF EXISTS code,holiday_weekend,department,post,employee,employee_post,absence,address,contact,employee_day,app_user,app_role,user_role, CASCADE ;
 
 CREATE TABLE code
 (
@@ -256,4 +256,34 @@ CREATE TABLE employee_day
     updated TIMESTAMP,
     FOREIGN KEY (code_id) references code(code_id)
 );
+
+CREATE TABLE app_user
+(
+    app_user_id BIGSERIAL PRIMARY KEY ,
+    username CHARACTER VARYING(255) NOT NULL UNIQUE,
+    password CHARACTER VARYING(255) NOT NULL,
+    email CHARACTER VARYING(255) NOT NULL UNIQUE ,
+    phone_number CHARACTER VARYING(255) NOT NULL UNIQUE,
+    created TIMESTAMP NOT NULL,
+    updated TIMESTAMP
+);
+
+CREATE TABLE app_role
+(
+    app_role_id BIGSERIAL PRIMARY KEY ,
+    name CHARACTER VARYING(30) NOT NULL ,
+    created TIMESTAMP NOT NULL ,
+    updated TIMESTAMP
+);
+
+CREATE TABLE user_role
+(
+    app_user_id BIGINT NOT NULL ,
+    app_role_id BIGINT NOT NULL ,
+    PRIMARY KEY (app_user_id, app_role_id),
+    FOREIGN KEY (app_user_id) REFERENCES app_user(app_user_id),
+    FOREIGN KEY (app_role_id) REFERENCES app_role(app_role_id)
+);
+INSERT INTO app_role (name, created) VALUES ('ROLE_USER','2020-05-15');
+INSERT INTO app_role (name, created) VALUES ('ROLE_ADMIN','2020-05-15');
 
