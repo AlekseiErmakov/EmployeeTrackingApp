@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface UserService {
     Map<String, String> save(AppUser absence);
+    void update(AppUser appUser);
     void deleteById(Long id);
     AppUser findById(Long id);
     List<AppUser> findAll();

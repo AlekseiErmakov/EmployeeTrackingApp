@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="passwordConfirmed">Подтверждение пароля</label>
                         <input type="password" class="form-control" id="passwordConfirmed" th:field="*{passwordConfirmed}" required>
-                        <span class="text-danger" th:text="${paswordConfirmed}"></span>
+                        <span class="text-danger" th:text="${passwordConfirmed}"></span>
                     </div>
                     <div class="form-group">
                         <label for="email">Электронная почта</label>
@@ -36,17 +36,21 @@
                         <span class="text-danger" th:text="${email}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="email_confirm">Подтверждение эелектронной почты</label>
+                        <label for="email_confirm">Подтверждение электронной почты</label>
                         <input type="email" class="form-control" id="email_confirm" th:field="*{emailConfirmed}" required>
                         <span class="text-danger" th:text="${emailConfirmed}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Подтверждение эелектронной почты</label>
+                        <label for="phone">Номер телефона</label>
                         <input type="tel" class="form-control" id="phone" th:field="*{phoneNumber}" required>
                         <span class="text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
                     </div>
+                    <div  sec:authorize="hasRole('ROLE_ADMIN')" class="custom-control custom-checkbox" th:each="role : ${roles}">
+                        <input type="checkbox" class="custom-control-input" name="role" th:field="*{roleIdSet}" th:value="${role.id}" th:id="${role.id}" >
+                        <label class="custom-control-label" th:for="${role.id}" th:utext="${role.name}"></label>
+                    </div>
                     <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-primary btn-block mb-3">Подтверждение</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Зарегистрироваться</button>
                     </div>
                     <div class="text-center mt-4">
                         <a  th:href="@{/}">Назад</a>

@@ -8,11 +8,16 @@
 </head>
 <body>
     <div class="container mt-6" >
-        <h1> Главная страница</h1>
-        <a th:href="@{/login}">Войти</a>
-        <a th:href="@{/registration}">Зарегистрироваться</a>
+        <h1>Главная страница</h1>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}" >Войти</a>
+            <a th:href="@{/registration}" >Зарегистрироваться</a>
+        </div>
         <div sec:authorize="hasRole('ROLE_USER')">
-            <a th:href="@{/employee/list}">Список сотридников</a>
+            <a th:href="@{/employee/list}">Список сотрудников</a>
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a th:href="@{/admin/list}">Админка</a>
         </div>
         <div sec:authorize="isAuthenticated()">
             Text visible only to authenticated users.

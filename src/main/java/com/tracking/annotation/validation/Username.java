@@ -1,6 +1,7 @@
 package com.tracking.annotation.validation;
 
-import com.tracking.annotation.annotationprocessor.PasswordValidator;
+
+import com.tracking.annotation.annotationprocessor.UsernameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -8,7 +9,7 @@ import java.lang.annotation.*;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = PasswordValidator.class)
+@Constraint(validatedBy = UsernameValidator.class)
 @Documented
 public @interface Username {
 

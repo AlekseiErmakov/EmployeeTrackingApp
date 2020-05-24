@@ -22,23 +22,24 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
                 minLength <= password.length() && maxLength >= password.length();
     }
 
-    private boolean containsLowLetter(String password) {
+    public boolean containsLowLetter(String password) {
         String sub = password.replaceAll("[^a-z]", "");
         return sub.length() > 0;
     }
 
-    private boolean containsUpLetter(String password) {
+    public boolean containsUpLetter(String password) {
         String sub = password.replaceAll("[^A-Z]]", "");
         return sub.length() > 0;
     }
 
-    private boolean containsNum(String password) {
+    public boolean containsNum(String password) {
         String sub = password.replaceAll("[^0-9]", "");
         return sub.length() > 0;
     }
 
-    private boolean containsIllegal(String password) {
-        String sub = password.replaceAll("[^0-9a-zA-Z]", "");
+    public boolean containsIllegal(String password) {
+        String sub = password.replaceAll("[0-9a-zA-Z]", "");
         return sub.length() > 0;
     }
+
 }
