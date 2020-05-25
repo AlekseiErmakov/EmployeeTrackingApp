@@ -1,4 +1,4 @@
-package com.tracking.model.tabel;
+package com.tracking.model;
 
 import lombok.Getter;
 import lombok.Setter;

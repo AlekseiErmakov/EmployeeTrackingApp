@@ -1,7 +1,7 @@
 package com.tracking.model.employee;
 
 
-import com.tracking.model.tabel.AbstractEntity;
+import com.tracking.model.AbstractEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +25,10 @@ public class Department extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "department",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "department",fetch = FetchType.EAGER)
     private Set<Employee> employees = new HashSet<>();
+
+    public String getSize(){
+        return employees.size() + " работников";
+    }
 }

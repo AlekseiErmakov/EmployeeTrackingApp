@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Список подразделений</h1>
+        <div class="row">
+            <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
+            <div class="col-sm-6 col-md-3" th:each="department : ${departments}">
+                <div class="card" >
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+                    <div class="card-body">
+                        <h5 class="card-title" th:utext="${department.name}"></h5>
+                        <p th:utext="${department.getSize()}"></p>
+                        <a th:href="@{/table/department(id=${department.id},month='current')}" class="btn btn-primary">Табель учета рабочего времени</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

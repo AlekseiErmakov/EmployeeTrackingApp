@@ -1,7 +1,7 @@
 package com.tracking.mapper;
 
 import com.tracking.dto.AbstractDto;
-import com.tracking.model.tabel.AbstractEntity;
+import com.tracking.model.AbstractEntity;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 

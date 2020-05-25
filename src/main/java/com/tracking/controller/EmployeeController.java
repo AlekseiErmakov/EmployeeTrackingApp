@@ -31,9 +31,7 @@ public class EmployeeController {
         this.departmentService = departmentService;
         this.postService = postService;
         this.employeeMapper = employeeMapper;
-
     }
-
 
     @GetMapping("/new")
     public String getEmployeeForm(EmployeeDto employeeDto) {
