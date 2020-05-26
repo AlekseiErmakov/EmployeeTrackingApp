@@ -1,0 +1,39 @@
+.col_day {
+    width: 60px;
+}
+.col_name {
+    width: 240px;
+}
+.col_num {
+    width: 120px;
+}
+
+.table {
+    line-height: 1.2;
+}
+
+.table-department {
+    max-height: 610px;
+    overflow-y: auto;
+}
+
+.table .col_select {
+    position: relative;
+    min-width: 50px;
+    padding: 0;
+}
+
+.col_select .form-control {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    border-color: #fff;
+    border-radius: 0;
+}
+
+.col_select .form-control:focus {
+    z-index: 1;
+}

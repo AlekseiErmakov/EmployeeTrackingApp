@@ -1,14 +1,41 @@
 package com.tracking.model.tabel;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
-import com.tracking.model.employee.Employee;
-import lombok.Data;
 
+import com.tracking.model.AbstractEntity;
+import com.tracking.model.employee.Employee;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
-public class EmployeeDay {
+@Entity
+@Table(name = "employee_day")
+@Getter
+@Setter
+@NoArgsConstructor
+public class EmployeeDay extends AbstractEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @Column(name = "date")
     private LocalDate localDate;
+
+    @JoinColumn(name = "code_id")
+    @ManyToOne
     private Code code;
+
+    public EmployeeDay(Employee employee, LocalDate localDate){
+        this.employee = employee;
+        this.localDate = localDate;
+    }
 }

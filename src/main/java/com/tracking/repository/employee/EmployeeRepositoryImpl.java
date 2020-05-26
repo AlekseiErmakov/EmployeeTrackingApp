@@ -1,5 +1,6 @@
 package com.tracking.repository.employee;
 
+import com.tracking.model.employee.Department;
 import com.tracking.model.employee.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +11,9 @@ import org.hibernate.query.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -52,6 +55,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         Employee employee = currentSession.byId(Employee.class).load(id);
         currentSession.delete(employee);
     }
+
+
 
 
 }

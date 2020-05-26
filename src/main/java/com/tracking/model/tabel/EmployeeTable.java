@@ -1,12 +1,16 @@
 package com.tracking.model.tabel;
 
+import com.tracking.model.AbstractEntity;
 import com.tracking.model.employee.Employee;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
-public class EmployeeTable {
+@EqualsAndHashCode(callSuper = false)
+public class EmployeeTable extends AbstractEntity {
     private Employee employee;
-    private Set<EmployeeDay> employeeDays;
+    private List<EmployeeDay> employeeDays;
+    private int month;
 }

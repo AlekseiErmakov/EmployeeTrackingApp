@@ -3,25 +3,25 @@ DROP TABLE IF EXISTS code,holiday_weekend,department,post,employee,employee_post
 CREATE TABLE code
 (
     code_id SERIAL PRIMARY KEY NOT NULL ,
-    char_code CHARACTER VARYING(5),
+    status CHARACTER VARYING(5),
     description CHARACTER VARYING(255),
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP
 );
 
-INSERT INTO code (char_code, description, created) VALUES ('Я','Полный рабочий день','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('Н','Отсутствие на рабочем месте по невыясненной причине','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('B','Выходные и праздничные дни','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('Рв','Работа в праздничные и выходные дни; а также работа в праздничные и выходные дни, при
+INSERT INTO code (status, description, created) VALUES ('Я','Полный рабочий день','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('Н','Отсутствие на рабочем месте по невыясненной причине','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('B','Выходные и праздничные дни','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('Рв','Работа в праздничные и выходные дни; а также работа в праздничные и выходные дни, при
 нахождении в командировке','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('Б','Дни временной нетрудоспособности','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('К','Командировочные дни; а также, выходные (нерабочие) дни при нахождении в командировке,
+INSERT INTO code (status, description, created) VALUES ('Б','Дни временной нетрудоспособности','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('К','Командировочные дни; а также, выходные (нерабочие) дни при нахождении в командировке,
 когда сотрудник отдыхает, в соответствии с графиком работы ООО «Наука» в командировке','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('ОТ','Ежегодный основной оплаченный отпуск','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('До','Неоплачиваемый отпуск','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('Хд','Хозяйственный день','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('У','Отпуск на период обучения','2020-05-15');
-INSERT INTO code (char_code, description, created) VALUES ('Ож','Отпуск по уходу за ребенком','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('ОТ','Ежегодный основной оплаченный отпуск','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('До','Неоплачиваемый отпуск','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('Хд','Хозяйственный день','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('У','Отпуск на период обучения','2020-05-15');
+INSERT INTO code (status, description, created) VALUES ('Ож','Отпуск по уходу за ребенком','2020-05-15');
 
 CREATE TABLE holiday_weekend
 (
@@ -249,12 +249,14 @@ CREATE TABLE employee_post
 );
 CREATE TABLE employee_day
 (
-    worker_day_id BIGSERIAL PRIMARY KEY ,
+    employee_day_id BIGSERIAL PRIMARY KEY ,
     date TIMESTAMP,
     code_id INTEGER,
+    employee_id BIGINT,
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP,
-    FOREIGN KEY (code_id) references code(code_id)
+    FOREIGN KEY (code_id) REFERENCES code(code_id),
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
 CREATE TABLE app_user
@@ -284,6 +286,8 @@ CREATE TABLE user_role
     FOREIGN KEY (app_user_id) REFERENCES app_user(app_user_id),
     FOREIGN KEY (app_role_id) REFERENCES app_role(app_role_id)
 );
+
 INSERT INTO app_role (name, created) VALUES ('ROLE_USER','2020-05-15');
 INSERT INTO app_role (name, created) VALUES ('ROLE_ADMIN','2020-05-15');
+
 

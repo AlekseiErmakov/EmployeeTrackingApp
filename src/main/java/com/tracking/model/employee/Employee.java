@@ -12,34 +12,33 @@ import java.time.LocalDate;
 @Table(name = "employee")
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false,onlyExplicitlyIncluded = true)
 public class Employee extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
-    @EqualsAndHashCode.Exclude
     private Long id;
 
     @Column(name = "num")
-    private String num;
+    @EqualsAndHashCode.Include private String num;
 
     @Column(name = "first_name")
-    private String firstName;
+    @EqualsAndHashCode.Include private String firstName;
 
     @Column(name = "last_name")
-    private String lastName;
+    @EqualsAndHashCode.Include private String lastName;
 
     @Column(name = "birthday")
-    private LocalDate birthday;
+    @EqualsAndHashCode.Include private LocalDate birthday;
 
     @Column(name = "gender")
-    private Character gender;
+    @EqualsAndHashCode.Include private Character gender;
 
     @Column(name = "is_remote")
     private Boolean isRemote;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
 

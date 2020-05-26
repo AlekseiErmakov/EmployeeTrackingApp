@@ -49,26 +49,21 @@ public class RegistrationController {
     public String regUser(@ModelAttribute("userDto") @Valid UserDto userDto,
                           BindingResult bindingResult, Model model) {
 
-        System.out.println(bindingResult);
         if (bindingResult.hasErrors()) {
-            System.out.println("ТУТ 1");
             return "registration";
         }
         if (!isSame(userDto.getPassword(),userDto.getPasswordConfirmed())) {
             model.addAttribute("passwordConfirmed", "Введенные пароли не совпадают");
-            System.out.println("ТУТ 2");
             return "registration";
         }
         if (!isSame(userDto.getEmail(),userDto.getEmailConfirmed())) {
             model.addAttribute("emailConfirmed", "Введенные пароли не совпадают");
-            System.out.println("ТУТ 3");
             return "registration";
         }
         AppUser user = userMapper.toEntity(userDto);
         Map<String,String> errors = userService.save(user);
         if (errors.size()>0) {
             errors.keySet().forEach(key->model.addAttribute(key,errors.get(key)));
-            System.out.println("ТУТ");
             return "registration";
         }
         return "redirect:/";

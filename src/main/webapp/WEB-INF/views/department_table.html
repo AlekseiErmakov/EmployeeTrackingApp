@@ -5,127 +5,106 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}">
 </head>
 <body>
-    <div class="container-fluid">
-        <h1>
-            Табель учета рабочего времени <span th:utext="departmentTabel.department.name"></span>
-        </h1>
-        <div class="mb-4 mt-4">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Январь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Февраль</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Март</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Апрель</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Май</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Июнь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Август</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Сентябрь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Октябрь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Ноябрь</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Декабрь</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active">
-                    <table class="table table-bordered mt-3">
+
+<div class="container-fluid">
+    <h1 class="text-center mt-5">
+        Табель учета рабочего времени
+        <!--/*@thymesVar id="departmentTable" type="com.tracking.model.tabel.DepartmentTable"*/-->
+        <span th:utext="${departmentTable.department.name}"></span>
+    </h1>
+    <div class="mb-5 mt-5">
+        <!--/*@thymesVar id="departmentTable" type="com.tracking.model.tabel.DepartmentTable"*/-->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+
+                <a class="nav-link active"
+                   th:href="@{/table/dep(id=${departmentTable.department.id},month=1)}">Январь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=2)}">Февраль</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=3)}">Март</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=4)}">Апрель</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=5)}">Май</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/table/dep(id=${departmentTable.department.id},month=6)}">Июнь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=7)}">Июль</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=8)}">Август</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=9)}">Сентябрь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=10)}">Октябрь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=11)}">Ноябрь</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/table/dep(id=${departmentTable.department.id},month=12)}">Декабрь</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active">
+                <div class="table-responsive table-department mt-3">
+
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
-                            <th>10</th>
-                            <th>11</th>
-                            <th>12</th>
-                            <th>13</th>
-                            <th>14</th>
-                            <th>15</th>
-                            <th>16</th>
-                            <th>17</th>
-                            <th>18</th>
-                            <th>19</th>
-                            <th>20</th>
-                            <th>21</th>
-                            <th>22</th>
-                            <th>23</th>
-                            <th>24</th>
-                            <th>25</th>
-                            <th>26</th>
-                            <th>27</th>
-                            <th>28</th>
-                            <th>29</th>
-                            <th>30</th>
-                            <th>31</th>
+                            <th>Табельный номер</th>
+                            <th>Сотрудник</th>
+                            <th th:each="index : ${departmentTable.days}"
+                                th:utext="${index}"></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><select>
-                                <option>Пиздец</option>
-                                <option>Совсем Пиздец</option>
-                                <option>Перчаточно-Масочный режим</option>
-                            </select></td>
-                            <td>Ot</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                            <td>@m</td>
-                        </tr>
+                            <tr th:each="employeeTable : ${departmentTable.employeeTables}">
+                                <form method="post" th:object="${employeeTableDto}"
+                                      th:action="@{save/employee(month=${employeeTable.month},employeeId=${employeeTable.employee.id})}">
+                                <td th:utext="${employeeTable.employee.num}"></td>
+                                <td th:utext="${employeeTable.employee.getFullName()}"></td>
+                                <td class="col_select" th:each="employeeDay : ${employeeTable.employeeDays}">
+                                    <select class="form-control" th:field="*{statusList}">
+                                        <option th:value="${null}" value=""> --</option>
+                                        <!--/*@thymesVar id="code" type="com.tracking.model.tabel.Code"*/-->
+                                        <option th:each="code : ${codes}"
+                                                th:utext="${code.status}"
+                                                th:value="${code.id}"
+                                        ></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary mt-4">Сохранить изменения</button>
+                                </td>
+                                </form>
+                            </tr>
                         </tbody>
                     </table>
+                    <div class="text-right mb-2">
+                        <button type="submit" class="btn btn-primary mt-4">Сохранить изменения</button>
+                    </div>
+                    <div class="text-right mb-4">
+                        <a th:href="@{/table/company}">Назад</a>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
+</div>
 </body>
 </html>

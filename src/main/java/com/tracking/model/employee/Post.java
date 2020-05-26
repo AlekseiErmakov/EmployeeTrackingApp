@@ -13,16 +13,16 @@ import java.util.Set;
 @Table(name = "post")
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false,onlyExplicitlyIncluded = true)
 public class Post extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    @EqualsAndHashCode.Exclude private Long id;
+    private Long id;
 
     @Column(name = "name")
-    private String name;
+    @EqualsAndHashCode.Include private String name;
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
     private Set<Employee> employees = new HashSet<>();

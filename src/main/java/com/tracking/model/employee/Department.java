@@ -14,21 +14,29 @@ import java.util.Set;
 @Table(name = "department")
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false,onlyExplicitlyIncluded = true)
 public class Department extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "department_id")
-    @EqualsAndHashCode.Exclude private Long id;
+    private Long id;
 
     @Column(name = "name")
-    private String name;
+    @EqualsAndHashCode.Include private String name;
 
-    @OneToMany(mappedBy = "department",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "department",fetch = FetchType.LAZY)
     private Set<Employee> employees = new HashSet<>();
 
     public String getSize(){
         return employees.size() + " работников";
     }
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'';
+    }
+
+
 }

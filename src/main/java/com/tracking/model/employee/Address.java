@@ -32,7 +32,7 @@ public class Address extends AbstractEntity {
     private String flat;
 
     @OneToOne(orphanRemoval = true, mappedBy = "address")
-    private Employee employee;
+    @EqualsAndHashCode.Exclude private Employee employee;
 
     public String getFullAddress(){
         return "г. " + city + " ул. " + street +

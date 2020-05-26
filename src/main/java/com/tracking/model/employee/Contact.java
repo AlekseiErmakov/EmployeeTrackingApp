@@ -26,7 +26,7 @@ public class Contact extends AbstractEntity {
     private String phone;
 
     @OneToOne(orphanRemoval = true, mappedBy = "contact")
-    private Employee employee;
+    @EqualsAndHashCode.Exclude private Employee employee;
 
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package com.tracking.service.user;
 
-import com.tracking.model.registration.AppUser;
 import com.tracking.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
