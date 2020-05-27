@@ -3,6 +3,7 @@ package com.tracking.controller;
 
 import com.tracking.dto.EmployeeTableDto;
 import com.tracking.mapper.DepartmentTableMapper;
+import com.tracking.mapper.EmployeeTableMapper;
 import com.tracking.model.employee.Department;
 import com.tracking.model.employee.Employee;
 import com.tracking.model.tabel.Code;
@@ -11,6 +12,7 @@ import com.tracking.model.tabel.EmployeeTable;
 import com.tracking.service.employee.DepartmentService;
 import com.tracking.service.employee.EmployeeService;
 import com.tracking.service.tabel.CodeService;
+import com.tracking.service.tabel.HolidayService;
 import com.tracking.service.tabel.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,16 +36,23 @@ public class TableController {
 
     private CodeService codeService;
 
+    private HolidayService holidayService;
+
+    private EmployeeTableMapper employeeTableMapper;
+
     private DepartmentTableMapper departmentTableMapper;
 
     @Autowired
     public TableController(DepartmentService departmentService, TableService tableService,
                            EmployeeService employeeService, CodeService codeService,
+                           HolidayService holidayService, EmployeeTableMapper employeeTableMapper,
                            DepartmentTableMapper departmentTableMapper) {
         this.departmentService = departmentService;
         this.tableService = tableService;
         this.employeeService = employeeService;
         this.codeService = codeService;
+        this.holidayService = holidayService;
+        this.employeeTableMapper = employeeTableMapper;
         this.departmentTableMapper = departmentTableMapper;
     }
 
@@ -65,21 +74,30 @@ public class TableController {
     public String getTableByMonth(@RequestParam("id") Long id,
                                   @RequestParam("month") int month, Model model) {
         DepartmentTable departmentTable = processTable(id, month);
-        List<EmployeeTable> employeeTables = departmentTable.getEmployeeTables();
-        employeeTables.stream().forEach(employeeTable -> employeeTable.getEmployeeDays().stream().forEach(employeeDay -> System.out.println(employeeDay.getCode())));
         model.addAttribute("departmentTable", departmentTable);
         return "department_table";
     }
+    @GetMapping("/employee")
+    public String getEmployeeMonthTable(@RequestParam("id") Long id,
+                                        @RequestParam("month") Integer month, Model model){
+        Employee employee = employeeService.findById(id);
+        List<Integer> holidays = holidayService.getHolidayDatesByMonth(month);
+        EmployeeTable employeeTable = tableService.getEmployeeTable(employee, month);
+        EmployeeTableDto employeeTableDto = employeeTableMapper.toDto(employeeTable);
+        model.addAttribute("holidays" ,holidays);
+        model.addAttribute("employeeTableDto", employeeTableDto);
+        return "employee_table";
+    }
 
     @PostMapping("/save/employee")
-    public String saveTable(@RequestParam("month") Integer month,
-                            @RequestParam("employeeId") Long employeeId, EmployeeTableDto employeeTableDto) {
-
+    public String saveEmployeeTable(@RequestParam("id") Long employeeId,
+                                    @RequestParam("month") int month,
+                                    EmployeeTableDto employeeTableDto){
         List<Code> employeeStatusList = employeeTableDto.getStatusList().stream()
                 .map(statusId -> statusId == null ? null : codeService.findById(statusId))
                 .collect(Collectors.toList());
         Employee employee = employeeService.findById(employeeId);
-        tableService.saveEmployeeTable(month, employee, employeeStatusList);
+        tableService.saveEmployeeTable(month,employee,employeeStatusList);
         return "redirect:/table/dep?id=" + employee.getDepartment().getId() + "&month=" + month;
     }
 
@@ -91,11 +109,6 @@ public class TableController {
     @ModelAttribute("codes")
     public List<Code> getCodes() {
         return this.codeService.findAll();
-    }
-
-    @ModelAttribute("employeeTableDto")
-    public EmployeeTableDto getEmptyTable() {
-        return new EmployeeTableDto();
     }
 
     private DepartmentTable processTable(Long depId, int month) {

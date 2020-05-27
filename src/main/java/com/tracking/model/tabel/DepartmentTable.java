@@ -18,4 +18,6 @@ public class DepartmentTable extends AbstractEntity {
     private List<EmployeeTable> employeeTables;
 
     private List<Integer> days = new ArrayList<>();
+
+    private int month;
 }

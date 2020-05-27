@@ -45,6 +45,7 @@ public class DepartmentTableMapper extends AbstractMapper<DepartmentTable, Depar
         destination.setDays(source.getDays());
         destination.setDepartmentName(source.getDepartment().getName());
         destination.setId(source.getDepartment().getId());
+        destination.setMonth(source.getMonth());
         List<EmployeeTableDto> collect = source.getEmployeeTables().stream()
                 .map(employeeTable -> employeeTableMapper.toDto(employeeTable))
                 .collect(Collectors.toList());

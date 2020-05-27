@@ -41,6 +41,8 @@ public class EmployeeDayServiceImpl implements EmployeeDayService {
     @Override
     @Transactional
     public EmployeeDay getEmployeeDayByEmployeeAndDate(Employee employee, LocalDate localDate) {
-        return employeeDayRepository.getEmployeeDayByEmployeeAndDate(employee,localDate);
+        return employeeDayRepository.getEmployeeDaysByEmployee(employee).stream()
+                .filter(employeeDay -> employeeDay.getLocalDate().equals(localDate))
+                .findFirst().orElse(null);
     }
 }

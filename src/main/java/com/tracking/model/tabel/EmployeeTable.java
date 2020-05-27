@@ -5,6 +5,7 @@ import com.tracking.model.employee.Employee;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.Month;
 import java.util.List;
 
 @Data
@@ -12,5 +13,5 @@ import java.util.List;
 public class EmployeeTable extends AbstractEntity {
     private Employee employee;
     private List<EmployeeDay> employeeDays;
-    private int month;
+    private Month month;
 }

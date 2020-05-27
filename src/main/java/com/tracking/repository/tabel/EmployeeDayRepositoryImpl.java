@@ -46,22 +46,6 @@ public class EmployeeDayRepositoryImpl implements EmployeeDayRepository {
     }
 
     @Override
-    public EmployeeDay getEmployeeDayByEmployeeAndDate(Employee employee, LocalDate localDate) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        CriteriaBuilder cb = currentSession.getCriteriaBuilder();
-        CriteriaQuery<EmployeeDay> cq = cb.createQuery(EmployeeDay.class);
-        Root<EmployeeDay> root = cq.from(EmployeeDay.class);
-        cq.select(root).where(cb.equal(root.get("employee"),employee)).where(cb.equal(root.get("localDate"),localDate));
-        Query<EmployeeDay> query = currentSession.createQuery(cq);
-        try{
-            EmployeeDay singleResult = query.getSingleResult();
-            return singleResult;
-        }catch (NoResultException ex){
-            return null;
-        }
-    }
-
-    @Override
     public EmployeeDay findById(Long id) {
         Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.get(EmployeeDay.class,id);

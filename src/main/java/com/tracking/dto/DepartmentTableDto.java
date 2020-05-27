@@ -9,6 +9,7 @@ import java.util.List;
 public class DepartmentTableDto extends AbstractDto {
     private Long id;
     private String departmentName;
+    private int month;
     private List<EmployeeTableDto> employeeTableDtoList = new ArrayList<>();
     private List<Integer> days = new ArrayList<>();
 }

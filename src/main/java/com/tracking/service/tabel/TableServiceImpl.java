@@ -36,6 +36,7 @@ public class TableServiceImpl implements TableService {
         DepartmentTable departmentTable = new DepartmentTable();
         departmentTable.setDepartment(department);
         departmentTable.setEmployeeTables(employeeTableSet);
+        departmentTable.setMonth(month);
         int length = getMonthLength(month);
         List<Integer> head = getHead(length);
         departmentTable.setDays(head);
@@ -56,6 +57,16 @@ public class TableServiceImpl implements TableService {
             EmployeeDay employeeDay = createEmployeeDay(i + 1, employeeStatusList.get(i), employee, month);
             employeeDayService.save(employeeDay);
         }
+    }
+
+    @Override
+    public EmployeeTable getEmployeeTable(Employee employee, Integer month) {
+        EmployeeTable employeeTable = new EmployeeTable();
+        List<EmployeeDay> employeeDaysByMonth = getEmployeeDaysByMonth(month, employee);
+        employeeTable.setEmployeeDays(employeeDaysByMonth);
+        employeeTable.setEmployee(employee);
+        employeeTable.setMonth(employeeDaysByMonth.get(0).getLocalDate().getMonth());
+        return employeeTable;
     }
 
     private EmployeeDay createEmployeeDay(int day, Code code, Employee employee, Integer month) {
@@ -121,7 +132,7 @@ public class TableServiceImpl implements TableService {
         EmployeeTable employeeTable = new EmployeeTable();
         employeeTable.setEmployee(employee);
         employeeTable.setEmployeeDays(employeeDays);
-        employeeTable.setMonth(month);
+        employeeTable.setMonth(employeeDays.get(0).getLocalDate().getMonth());
         return employeeTable;
     }
 }

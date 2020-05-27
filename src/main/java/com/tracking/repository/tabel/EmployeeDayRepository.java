@@ -11,7 +11,5 @@ public interface EmployeeDayRepository {
     List<EmployeeDay> getEmployeeDaysByEmployee(Employee employee);
     void saveEmployeeDay(EmployeeDay employeeDay);
 
-    EmployeeDay getEmployeeDayByEmployeeAndDate(Employee employee, LocalDate localDate);
-
     EmployeeDay findById(Long id);
 }

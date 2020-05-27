@@ -1,3 +1,16 @@
+.btn-icon {
+    fill: currentcolor;
+}
+
+.btn-icon-gray {
+    color: #888;
+}
+
+.btn-icon-gray:hover,
+.btn-icon-gray:focus {
+    color: #666;
+}
+
 .col_day {
     width: 60px;
 }
@@ -17,23 +30,100 @@
     overflow-y: auto;
 }
 
-.table .col_select {
-    position: relative;
-    min-width: 50px;
-    padding: 0;
+.table-department th,
+.table-department td {
+    padding: 10px;
 }
 
-.col_select .form-control {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    border-color: #fff;
+.table-department-col {
+    min-width: 48px;
+    text-align: center;
+}
+
+.calendar {
+    border: 1px solid #454d55;
+    text-align: center;
+}
+
+.calendar-header,
+.calendar-body {
+    display: flex;
+}
+
+.calendar-header > div,
+.calendar-item {
+    width: calc(100% / 7);
+    border-right: 1px solid #454d55;
+}
+
+.calendar-item:nth-of-type(7n),
+.calendar-header > div:last-of-type {
+    border-right: 0;
+}
+
+.calendar-header > div {
+    border-bottom: 1px solid #454d55;
+    padding: 12px;
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+    font-weight: 700;
+}
+
+.calendar-body {
+    flex-wrap: wrap;
+}
+
+.calendar-item {
+    border-top: 1px solid #454d55;
+}
+
+.calendar-date {
+    display: block;
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.calendar .form-control {
+    position: relative;
+    border-color: transparent;
     border-radius: 0;
 }
 
-.col_select .form-control:focus {
-    z-index: 1;
+.calendar .form-control option {
+    background: #fff;
+    color: #000;
+}
+
+.calendar .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,.15);
+}
+
+.calendar-item:nth-of-type(7n - 1),
+.calendar-item:nth-of-type(7n),
+.calendar-holiday,
+.calendar-item:nth-of-type(7n - 1) .form-control,
+.calendar-item:nth-of-type(7n) .form-control,
+.calendar-holiday .form-control {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.calendar-item:nth-of-type(7n - 1),
+.calendar-item:nth-of-type(7n),
+.calendar .calendar-holiday {
+    border-color: #fff;
+}
+
+.calendar-item:nth-of-type(7n - 1) .calendar-date,
+.calendar-item:nth-of-type(7n) .calendar-date,
+.calendar-holiday .calendar-date {
+    border-color: #bd1f2e;
+}
+
+.calendar-item:nth-of-type(7n - 1) .form-control:focus,
+.calendar-item:nth-of-type(7n) .form-control:focus,
+.calendar .calendar-holiday .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(225,225,225,.5);
 }
