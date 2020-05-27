@@ -60,4 +60,10 @@ public class EmployeeDayRepositoryImpl implements EmployeeDayRepository {
             return null;
         }
     }
+
+    @Override
+    public EmployeeDay findById(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        return currentSession.get(EmployeeDay.class,id);
+    }
 }

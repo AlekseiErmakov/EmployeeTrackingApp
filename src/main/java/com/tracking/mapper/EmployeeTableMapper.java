@@ -20,7 +20,6 @@ public class EmployeeTableMapper extends AbstractMapper<EmployeeTable, EmployeeT
 
     private ModelMapper modelMapper;
 
-    private CodeService codeService;
 
     @Autowired
     public EmployeeTableMapper(ModelMapper modelMapper) {
@@ -40,14 +39,12 @@ public class EmployeeTableMapper extends AbstractMapper<EmployeeTable, EmployeeT
     protected void mapSpecificFields(EmployeeTable source, EmployeeTableDto destination) {
         Employee employee = source.getEmployee();
         List<Long> collect = source.getEmployeeDays().stream()
-                .map(employeeDay -> employeeDay.getCode().getId())
+                .map(employeeDay -> employeeDay.getCode() == null ? null : employeeDay.getCode().getId())
                 .collect(Collectors.toList());
         destination.setStatusList(collect);
-    }
-
-    @Override
-    protected void mapSpecificFields(EmployeeTableDto source, EmployeeTable destination) {
-        super.mapSpecificFields(source, destination);
+        destination.setEmployeeId(employee.getId());
+        destination.setNum(employee.getNum());
+        destination.setEmployeeFullName(employee.getFullName());
     }
 
 }

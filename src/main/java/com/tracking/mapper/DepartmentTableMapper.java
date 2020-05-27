@@ -39,14 +39,6 @@ public class DepartmentTableMapper extends AbstractMapper<DepartmentTable, Depar
                 .setPostConverter(toEntityConverter());
     }
 
-    @Override
-    protected void mapSpecificFields(DepartmentTableDto source, DepartmentTable destination) {
-        destination.setDepartment(departmentService.findById(source.getId()));
-        List<EmployeeTable> collect = source.getEmployeeTableDtoList().stream()
-                .map(employeeTableDto -> employeeTableMapper.toEntity(employeeTableDto))
-                .collect(Collectors.toList());
-        destination.setEmployeeTables(collect);
-    }
 
     @Override
     protected void mapSpecificFields(DepartmentTable source, DepartmentTableDto destination) {

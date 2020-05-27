@@ -6,7 +6,6 @@ import com.tracking.model.tabel.Code;
 import com.tracking.model.tabel.DepartmentTable;
 import com.tracking.model.tabel.EmployeeDay;
 import com.tracking.model.tabel.EmployeeTable;
-import com.tracking.repository.tabel.EmployeeDayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,16 +20,15 @@ import java.util.stream.Stream;
 @Service
 public class TableServiceImpl implements TableService {
 
-    private EmployeeDayRepository employeeDayRepository;
+    private EmployeeDayService employeeDayService;
 
 
     @Autowired
-    public TableServiceImpl(EmployeeDayRepository employeeDayRepository) {
-        this.employeeDayRepository = employeeDayRepository;
+    public TableServiceImpl(EmployeeDayService employeeDayService) {
+        this.employeeDayService = employeeDayService;
     }
 
     @Override
-    @Transactional
     public DepartmentTable getDepartmentTable(Department department, Set<Employee> employees, int month) {
         List<EmployeeTable> employeeTableSet = employees.stream()
                 .map(employee -> getEmployeeTable(month,employee, getEmployeeDaysByMonth(month, employee)))
@@ -46,31 +44,24 @@ public class TableServiceImpl implements TableService {
 
 
     @Override
-    @Transactional
     public void saveDepartmentTable(DepartmentTable departmentTable) {
         departmentTable.getEmployeeTables().stream()
                 .flatMap(employeeTable -> employeeTable.getEmployeeDays().stream())
-                .forEach(employeeDay -> employeeDayRepository.saveEmployeeDay(employeeDay));
+                .forEach(employeeDay -> employeeDayService.save(employeeDay));
     }
 
     @Override
-    @Transactional
     public void saveEmployeeTable(Integer month, Employee employee, List<Code> employeeStatusList) {
         for(int i = 0; i< employeeStatusList.size(); i++){
             EmployeeDay employeeDay = createEmployeeDay(i + 1, employeeStatusList.get(i), employee, month);
-            saveEmployeeDay(employeeDay);
+            employeeDayService.save(employeeDay);
         }
-    }
-
-    @Transactional
-    public void saveEmployeeDay(EmployeeDay employeeDay){
-        employeeDayRepository.saveEmployeeDay(employeeDay);
     }
 
     private EmployeeDay createEmployeeDay(int day, Code code, Employee employee, Integer month) {
         LocalDate now = LocalDate.now();
         LocalDate localDate = LocalDate.of(now.getYear(),month,day);
-        EmployeeDay employeeDayByEmployeeAndDate = employeeDayRepository.getEmployeeDayByEmployeeAndDate(employee, localDate);
+        EmployeeDay employeeDayByEmployeeAndDate = employeeDayService.getEmployeeDayByEmployeeAndDate(employee, localDate);
         if (employeeDayByEmployeeAndDate != null){
             employeeDayByEmployeeAndDate.setCode(code);
             return employeeDayByEmployeeAndDate;
@@ -121,7 +112,7 @@ public class TableServiceImpl implements TableService {
     }
 
     private List<EmployeeDay> fromDb(int month, Employee employee) {
-        return employeeDayRepository.getEmployeeDaysByEmployee(employee).stream()
+        return employeeDayService.getEmployeeDaysByEmployee(employee).stream()
                 .filter(employeeDay -> employeeDay.getLocalDate().getMonth().getValue() == month)
                 .collect(Collectors.toList());
     }

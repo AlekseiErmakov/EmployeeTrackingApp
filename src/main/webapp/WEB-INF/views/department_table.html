@@ -78,8 +78,8 @@
                                 <td th:utext="${employeeTable.employee.num}"></td>
                                 <td th:utext="${employeeTable.employee.getFullName()}"></td>
                                 <td class="col_select" th:each="employeeDay : ${employeeTable.employeeDays}">
-                                    <select class="form-control" th:field="*{statusList}">
-                                        <option th:value="${null}" value=""> --</option>
+                                    <select class="form-control" th:utext="" th:field="*{statusList}">
+                                        <option th:value="${null}"> --</option>
                                         <!--/*@thymesVar id="code" type="com.tracking.model.tabel.Code"*/-->
                                         <option th:each="code : ${codes}"
                                                 th:utext="${code.status}"

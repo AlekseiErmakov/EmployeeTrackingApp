@@ -1,17 +1,20 @@
-package com.tracking.repository.tabel;
+package com.tracking.service.tabel;
 
 import com.tracking.model.employee.Employee;
 import com.tracking.model.tabel.EmployeeDay;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
-public interface EmployeeDayRepository {
+public interface EmployeeDayService {
+
+    EmployeeDay findById(Long id);
+
+    void save(EmployeeDay employeeDay);
+
     List<EmployeeDay> getEmployeeDaysByEmployee(Employee employee);
-    void saveEmployeeDay(EmployeeDay employeeDay);
 
     EmployeeDay getEmployeeDayByEmployeeAndDate(Employee employee, LocalDate localDate);
 
-    EmployeeDay findById(Long id);
 }

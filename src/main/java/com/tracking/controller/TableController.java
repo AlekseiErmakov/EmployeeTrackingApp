@@ -7,6 +7,7 @@ import com.tracking.model.employee.Department;
 import com.tracking.model.employee.Employee;
 import com.tracking.model.tabel.Code;
 import com.tracking.model.tabel.DepartmentTable;
+import com.tracking.model.tabel.EmployeeTable;
 import com.tracking.service.employee.DepartmentService;
 import com.tracking.service.employee.EmployeeService;
 import com.tracking.service.tabel.CodeService;
@@ -64,6 +65,8 @@ public class TableController {
     public String getTableByMonth(@RequestParam("id") Long id,
                                   @RequestParam("month") int month, Model model) {
         DepartmentTable departmentTable = processTable(id, month);
+        List<EmployeeTable> employeeTables = departmentTable.getEmployeeTables();
+        employeeTables.stream().forEach(employeeTable -> employeeTable.getEmployeeDays().stream().forEach(employeeDay -> System.out.println(employeeDay.getCode())));
         model.addAttribute("departmentTable", departmentTable);
         return "department_table";
     }
@@ -71,12 +74,13 @@ public class TableController {
     @PostMapping("/save/employee")
     public String saveTable(@RequestParam("month") Integer month,
                             @RequestParam("employeeId") Long employeeId, EmployeeTableDto employeeTableDto) {
+
         List<Code> employeeStatusList = employeeTableDto.getStatusList().stream()
                 .map(statusId -> statusId == null ? null : codeService.findById(statusId))
                 .collect(Collectors.toList());
         Employee employee = employeeService.findById(employeeId);
         tableService.saveEmployeeTable(month, employee, employeeStatusList);
-        return "redirect:/department?id=" + employee.getDepartment().getId() + "month=" + month;
+        return "redirect:/table/dep?id=" + employee.getDepartment().getId() + "&month=" + month;
     }
 
     @ModelAttribute("departments")
