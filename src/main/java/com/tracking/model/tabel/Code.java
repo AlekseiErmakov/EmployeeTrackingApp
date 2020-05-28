@@ -4,6 +4,7 @@ import com.tracking.model.AbstractEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "code")
+@ToString
 public class Code extends AbstractEntity {
 
     @Id

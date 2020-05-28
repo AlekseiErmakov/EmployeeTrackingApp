@@ -3,15 +3,11 @@ package com.tracking.dto;
 import com.tracking.annotation.validation.Password;
 import com.tracking.annotation.validation.PhoneNumber;
 import com.tracking.annotation.validation.Username;
-import com.tracking.model.registration.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Data

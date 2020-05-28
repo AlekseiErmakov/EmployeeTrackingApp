@@ -37,7 +37,7 @@ public class EmployeeDto extends AbstractDto {
 
     private String postName;
 
-    public String getFullName(){
+    public String getFullName() {
         return firstName + " " + lastName;
     }
 

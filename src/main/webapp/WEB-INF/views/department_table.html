@@ -20,65 +20,11 @@
     <div class="mb-5 mt-5">
         <!--/*@thymesVar id="departmentTable" type="com.tracking.model.tabel.DepartmentTable"*/-->
         <ul class="nav nav-tabs">
-            <li class="nav-item">
+            <li class="nav-item" th:each="month, iStat : ${months}">
                 <a class="nav-link"
-                   th:classappend="${departmentTable.month == 1} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=1)}">Январь</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 2} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=2)}">Февраль</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 3} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=3)}">Март</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 4} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=4)}">Апрель</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 5} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=5)}">Май</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 6} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=6)}">Июнь</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 7} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=7)}">Июль</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 8} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=8)}">Август</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 9} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=9)}">Сентябрь</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 10} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=10)}">Октябрь</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 11} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=11)}">Ноябрь</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${departmentTable.month == 12} ? active : null"
-                   th:href="@{/table/dep(id=${departmentTable.department.id},month=12)}">Декабрь</a>
+                   th:classappend="${departmentTable.month == iStat.count} ? active : null"
+                   th:href="@{/table/dep(id=${departmentTable.department.id},month=${iStat.count})}"
+                   th:utext="${month}"></a>
             </li>
         </ul>
         <div class="tab-content">
@@ -95,23 +41,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="employeeTable : ${departmentTable.employeeTables}">
-                                <td th:utext="${employeeTable.employee.num}"></td>
-                                <td class="bg-danger text-white" th:utext="${employeeTable.employee.getFullName()}"></td>
-                                <td class="table-department-col" th:each="employeeDay : ${employeeTable.employeeDays}">
-                                    <div th:if="${employeeDay.code != null}" th:text="${employeeDay.code.status}"></div>
-                                    <div th:if="${employeeDay.code == null}" >...</div>
-                                </td>
-                                <td>
-                                    <a th:href="@{/table/employee(id=${employeeTable.employee.id},month=${departmentTable.month})}" class="btn-icon btn-icon-gray">
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"
-                                             viewBox="0 0 383.947 383.947" style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve">
-                                            <polygon points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893"/>
-                                            <path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04C386.027,77.92,386.027,64.373,377.707,56.053z"/>
+                        <tr th:each="employeeTable : ${departmentTable.employeeTables}">
+                            <td th:utext="${employeeTable.employee.num}"></td>
+                            <td th:utext="${employeeTable.employee.getFullName()}"></td>
+                            <td class="table-department-col" th:each="employeeDay,iStat : ${employeeTable.employeeDays}"
+                                th:classappend="${holidays.contains(iStat.count)} ? calendar-holiday : null">
+                                <div th:if="${employeeDay.code != null}" th:text="${employeeDay.code.status}"></div>
+                                <div th:if="${employeeDay.code == null}">...</div>
+                            </td>
+                            <td>
+                                <a th:href="@{/table/employee(id=${employeeTable.employee.id},month=${departmentTable.month})}"
+                                   class="btn-icon btn-icon-gray">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         width="16" height="16"
+                                         viewBox="0 0 383.947 383.947"
+                                         style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve">
+                                            <polygon
+                                                    points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893"/>
+                                        <path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04C386.027,77.92,386.027,64.373,377.707,56.053z"/>
                                         </svg>
-                                    </a>
-                                </td>
-                            </tr>
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

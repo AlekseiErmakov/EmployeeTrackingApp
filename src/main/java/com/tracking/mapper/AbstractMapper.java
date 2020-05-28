@@ -32,27 +32,30 @@ public class AbstractMapper<E extends AbstractEntity, D extends AbstractDto> imp
     public D toDto(E entity) {
         return Objects.isNull(entity) ? null : modelMapper.map(entity, dtoClass);
     }
-    Converter<E,D> toDtoConverter(){
+
+    Converter<E, D> toDtoConverter() {
         return mappingContext -> {
             E source = mappingContext.getSource();
             D destination = mappingContext.getDestination();
-            mapSpecificFields(source,destination);
+            mapSpecificFields(source, destination);
             return mappingContext.getDestination();
         };
     }
-    Converter<D,E> toEntityConverter(){
+
+    Converter<D, E> toEntityConverter() {
         return mappingContext -> {
             D source = mappingContext.getSource();
             E destination = mappingContext.getDestination();
-            mapSpecificFields(source,destination);
+            mapSpecificFields(source, destination);
             return mappingContext.getDestination();
         };
     }
 
-    protected void mapSpecificFields(E source, D destination){
+    protected void mapSpecificFields(E source, D destination) {
 
     }
-    protected void mapSpecificFields(D source, E destination){
+
+    protected void mapSpecificFields(D source, E destination) {
 
     }
 }

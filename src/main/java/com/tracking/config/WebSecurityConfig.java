@@ -33,12 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/registration","/resources/**").permitAll()
+                .antMatchers("/registration", "/resources/**").permitAll()
                 //Доступ только для пользователей с ролью Администратор
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/employee/**","/table/**").hasRole("USER")
+                .antMatchers("/employee/**", "/table/**").hasRole("USER")
                 //Доступ разрешен всем пользователей
-                .antMatchers("/").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()
@@ -58,7 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
-
 
 
     @Bean

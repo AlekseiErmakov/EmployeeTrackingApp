@@ -37,6 +37,6 @@ public class CodeRepositoryImpl implements CodeRepository {
     @Override
     public Code findById(Long codeid) {
         Session currentSession = sessionFactory.getCurrentSession();
-        return currentSession.get(Code.class,codeid);
+        return currentSession.get(Code.class, codeid);
     }
 }

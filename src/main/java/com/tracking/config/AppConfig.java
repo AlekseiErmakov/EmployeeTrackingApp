@@ -8,6 +8,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan("com.tracking")
 @EnableWebMvc
-@Import({ WebSecurityConfig.class, WebConfig.class, HibernateConfig.class, MvcConfig.class,MapConfig.class})
+@Import({WebSecurityConfig.class, WebConfig.class, HibernateConfig.class, MvcConfig.class, MapConfig.class})
 public class AppConfig {
 }

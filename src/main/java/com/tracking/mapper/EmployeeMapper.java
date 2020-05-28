@@ -18,6 +18,7 @@ public class EmployeeMapper extends AbstractMapper<Employee, EmployeeDto> {
 
     private DepartmentService departmentService;
     private PostService postService;
+
     @Autowired
     public EmployeeMapper(ModelMapper modelMapper, DepartmentService departmentService, PostService postService) {
         super(Employee.class, EmployeeDto.class, modelMapper);

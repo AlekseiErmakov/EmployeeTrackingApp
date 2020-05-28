@@ -29,12 +29,12 @@ public class RoleRepositoryImpl implements RoleRepository {
         CriteriaBuilder cb = currentSession.getCriteriaBuilder();
         CriteriaQuery<Role> cq = cb.createQuery(Role.class);
         Root<Role> root = cq.from(Role.class);
-        cq.select(root).where(cb.equal(root.get("name"),name));
+        cq.select(root).where(cb.equal(root.get("name"), name));
         Query<Role> query = currentSession.createQuery(cq);
         try {
             Role singleResult = query.getSingleResult();
             return singleResult;
-        }catch (NoResultException ex){
+        } catch (NoResultException ex) {
             return null;
         }
 

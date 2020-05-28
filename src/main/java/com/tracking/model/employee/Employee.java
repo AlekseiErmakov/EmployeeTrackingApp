@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "employee")
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false,onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class Employee extends AbstractEntity {
 
     @Id
@@ -21,19 +21,24 @@ public class Employee extends AbstractEntity {
     private Long id;
 
     @Column(name = "num")
-    @EqualsAndHashCode.Include private String num;
+    @EqualsAndHashCode.Include
+    private String num;
 
     @Column(name = "first_name")
-    @EqualsAndHashCode.Include private String firstName;
+    @EqualsAndHashCode.Include
+    private String firstName;
 
     @Column(name = "last_name")
-    @EqualsAndHashCode.Include private String lastName;
+    @EqualsAndHashCode.Include
+    private String lastName;
 
     @Column(name = "birthday")
-    @EqualsAndHashCode.Include private LocalDate birthday;
+    @EqualsAndHashCode.Include
+    private LocalDate birthday;
 
     @Column(name = "gender")
-    @EqualsAndHashCode.Include private Character gender;
+    @EqualsAndHashCode.Include
+    private Character gender;
 
     @Column(name = "is_remote")
     private Boolean isRemote;

@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -60,12 +59,12 @@ public class UserRepositoryImpl implements UserRepository {
         CriteriaBuilder cb = currentSession.getCriteriaBuilder();
         CriteriaQuery<AppUser> cq = cb.createQuery(AppUser.class);
         Root<AppUser> root = cq.from(AppUser.class);
-        cq.select(root).where(cb.equal(root.get(field),value));
+        cq.select(root).where(cb.equal(root.get(field), value));
         Query<AppUser> query = currentSession.createQuery(cq);
         try {
             AppUser singleResult = query.getSingleResult();
             return singleResult;
-        }catch (NoResultException ex){
+        } catch (NoResultException ex) {
             return null;
         }
     }

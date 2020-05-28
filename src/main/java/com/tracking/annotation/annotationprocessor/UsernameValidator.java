@@ -19,7 +19,8 @@ public class UsernameValidator implements ConstraintValidator<Username, String> 
     public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
         return !containsIllegal(username) && minLength <= username.length() && maxLength >= username.length();
     }
-    private boolean containsIllegal(String username){
+
+    private boolean containsIllegal(String username) {
         String sub = username.replaceAll("[a-z0-9A-Z]", "");
         return sub.length() > 0;
     }

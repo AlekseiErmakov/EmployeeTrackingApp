@@ -8,20 +8,25 @@
 
 </head>
 <body>
-    <div class="container">
-        <h1>Список подразделений</h1>
-        <div class="row">
-            <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
-            <div class="col-sm-6 col-md-3" th:each="department : ${departments}">
-                <div class="card" >
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-                    <div class="card-body">
-                        <h5 class="card-title" th:utext="${department.name}"></h5>
-                        <a th:href="@{/table/department(id=${department.id},current='current')}" class="btn btn-primary">Табель учета рабочего времени</a>
-                    </div>
+<div class="container">
+    <h1>Список подразделений</h1>
+    <div class="row">
+        <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
+        <div class="col-sm-6 col-md-3" th:each="department : ${departments}">
+            <div class="card">
+                <img th:src="${department.label}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:utext="${department.name}"></h5>
+                    <span>Колличество работников: </span><h1 th:utext="${workers[__${department.id}__]}"></h1>
+                    <a th:href="@{/table/department(id=${department.id},current='current')}" class="btn btn-primary">Табель
+                        учета рабочего времени</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="text-center mt-4">
+        <a th:href="@{/}">Назад</a>
+    </div>
+</div>
 </body>
 </html>

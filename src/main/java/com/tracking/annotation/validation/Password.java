@@ -11,11 +11,11 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = PasswordValidator.class)
 @Documented
 public @interface Password {
-    String message () default "password is not valid";
+    String message() default "password is not valid";
 
-    Class<?>[] groups () default {};
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload () default {};
+    Class<? extends Payload>[] payload() default {};
 
     int min() default 3;
 

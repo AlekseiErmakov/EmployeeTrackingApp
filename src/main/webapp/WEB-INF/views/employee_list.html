@@ -7,55 +7,55 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center mt-4">
-            Список сотрудников
-        </h1>
-        <div class="row mt-4 mb-4">
-            <div class="col-md-4 col-lg-5">
-                <input class="form-control" type="text" placeholder="Поиск...">
-            </div>
-        </div>
-        <div class="mb-4">
-            <a href="new" class="btn btn-primary">Добавить</a>
-        </div>
-        <div class="mb-4 mt-4">
-            <table class="table text-center">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Табельный номер</th>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Дата Рождения</th>
-                    <th>Возраст</th>
-                    <th>Должность</th>
-                    <th>Удаленная работа</th>
-                    <th>Адрес проживания</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <!--/*@thymesVar id="employees" type="com.tracking.model.employee.Employee"*/-->
-                <tr th:each="employee : ${employees}">
-                    <td th:utext="${employee.num}"></td>
-                    <td th:utext="${employee.firstName}"></td>
-                    <td th:utext="${employee.lastName}"></td>
-                    <td th:utext="${employee.birthday}"></td>
-                    <td th:utext="${employee.getAge()}"></td>
-                    <td th:utext="${employee.postName}"></td>
-                    <td th:utext="${employee.getIsRemoteDescription()}"></td>
-                    <td th:utext="${employee.address.getFullAddress()}"></td>
-                    <td>
-                        <a th:href="@{update/{id}(id=${employee.id})}">Edit</a>
-                    </td>
-                    <td>
-                        <a th:href="@{delete/{id}(id=${employee.id})}">Delete</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+<div class="container">
+    <h1 class="text-center mt-4">
+        Список сотрудников
+    </h1>
+    <div class="row mt-4 mb-4">
+        <div class="col-md-4 col-lg-5">
+            <input class="form-control" type="text" placeholder="Поиск...">
         </div>
     </div>
+    <div class="mb-4">
+        <a href="new" class="btn btn-primary">Добавить</a>
+    </div>
+    <div class="mb-4 mt-4">
+        <table class="table text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th>Табельный номер</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Дата Рождения</th>
+                <th>Возраст</th>
+                <th>Должность</th>
+                <th>Удаленная работа</th>
+                <th>Адрес проживания</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--/*@thymesVar id="employees" type="com.tracking.model.employee.Employee"*/-->
+            <tr th:each="employee : ${employees}">
+                <td th:utext="${employee.num}"></td>
+                <td th:utext="${employee.firstName}"></td>
+                <td th:utext="${employee.lastName}"></td>
+                <td th:utext="${employee.birthday}"></td>
+                <td th:utext="${employee.getAge()}"></td>
+                <td th:utext="${employee.postName}"></td>
+                <td th:utext="${employee.getIsRemoteDescription()}"></td>
+                <td th:utext="${employee.address.getFullAddress()}"></td>
+                <td>
+                    <a th:href="@{update/{id}(id=${employee.id})}">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{delete/{id}(id=${employee.id})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

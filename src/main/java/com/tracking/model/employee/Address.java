@@ -17,7 +17,8 @@ public class Address extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    @EqualsAndHashCode.Exclude private Long id;
+    @EqualsAndHashCode.Exclude
+    private Long id;
 
     @Column(name = "city")
     private String city;
@@ -32,13 +33,15 @@ public class Address extends AbstractEntity {
     private String flat;
 
     @OneToOne(orphanRemoval = true, mappedBy = "address")
-    @EqualsAndHashCode.Exclude private Employee employee;
+    @EqualsAndHashCode.Exclude
+    private Employee employee;
 
-    public String getFullAddress(){
+    public String getFullAddress() {
         return "г. " + city + " ул. " + street +
                 " д. " + house + " кв. " + flat;
 
     }
+
     @Override
     public String toString() {
         return "Address{" +

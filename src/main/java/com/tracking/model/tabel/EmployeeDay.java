@@ -3,7 +3,6 @@ package com.tracking.model.tabel;
 
 import com.tracking.model.AbstractEntity;
 import com.tracking.model.employee.Employee;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +33,7 @@ public class EmployeeDay extends AbstractEntity {
     @ManyToOne
     private Code code;
 
-    public EmployeeDay(Employee employee, LocalDate localDate){
+    public EmployeeDay(Employee employee, LocalDate localDate) {
         this.employee = employee;
         this.localDate = localDate;
     }

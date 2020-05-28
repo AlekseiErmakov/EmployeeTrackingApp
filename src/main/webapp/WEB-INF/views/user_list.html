@@ -7,49 +7,49 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <h1>Список пользователей</h1>
-        <div class="mb-4">
-            <a href="/registration" class="btn btn-primary">Добавить</a>
-        </div>
-        <div class="mb-4 mt-4">
-            <table class="table text-center">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>login</th>
-                        <th>password</th>
-                        <th>roles</th>
-                        <th>registered</th>
-                        <th>updated</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <!--/*@thymesVar id="users" type="com.tracking.model.registration.AppUser"*/-->
-                    <tr th:each="appUser : ${users}">
-                        <td th:utext="${appUser.username}"></td>
-                        <td th:utext="${appUser.password}"></td>
-                        <td>
-                            <div th:each="role : ${appUser.roles}"
-                                  th:utext="${role.name}"></div>
-                        </td>
-                        <td th:utext="${appUser.created}"></td>
-                        <td  th:utext="${appUser.updated}">
-                            <span th:if=""></span>
-                        </td>
-                        <td>
-                            <a th:href="@{update/{id}(id=${appUser.id})}">Edit</a>
-                        </td>
-                        <td>
-                            <a th:href="@{delete/{id}(id=${appUser.id})}">Delete</a>
-                        </td>
-                    </tr>
-                </thead>
-            </table>
-            <div>
-                <a th:href="@{/main}">Вернуться на главную страницу</a>
-                <a th:href="@{/logout}">Выйти</a>
-            </div>
+<div class="container">
+    <h1>Список пользователей</h1>
+    <div class="mb-4">
+        <a href="/registration" class="btn btn-primary">Добавить</a>
+    </div>
+    <div class="mb-4 mt-4">
+        <table class="table text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th>login</th>
+                <th>password</th>
+                <th>roles</th>
+                <th>registered</th>
+                <th>updated</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <!--/*@thymesVar id="users" type="com.tracking.model.registration.AppUser"*/-->
+            <tr th:each="appUser : ${users}">
+                <td th:utext="${appUser.username}"></td>
+                <td th:utext="${appUser.password}"></td>
+                <td>
+                    <div th:each="role : ${appUser.roles}"
+                         th:utext="${role.name}"></div>
+                </td>
+                <td th:utext="${appUser.created}"></td>
+                <td th:utext="${appUser.updated}">
+                    <span th:if=""></span>
+                </td>
+                <td>
+                    <a th:href="@{update/{id}(id=${appUser.id})}">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{delete/{id}(id=${appUser.id})}">Delete</a>
+                </td>
+            </tr>
+            </thead>
+        </table>
+        <div>
+            <a th:href="@{/main}">Вернуться на главную страницу</a>
+            <a th:href="@{/logout}">Выйти</a>
         </div>
     </div>
+</div>
 </body>
 </html>

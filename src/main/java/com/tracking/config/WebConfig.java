@@ -3,9 +3,7 @@ package com.tracking.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -55,10 +53,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (!registry.hasMappingForPattern("/styles/**")){
+        if (!registry.hasMappingForPattern("/styles/**")) {
             registry.addResourceHandler("/styles/**").addResourceLocations("classpath:/styles/");
         }
-        if (!registry.hasMappingForPattern("/img/**")){
+        if (!registry.hasMappingForPattern("/img/**")) {
             registry.addResourceHandler("/img/**").addResourceLocations("classpath:/img/");
         }
     }

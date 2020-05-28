@@ -8,14 +8,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class EmployeeDayRepositoryImpl implements EmployeeDayRepository {
@@ -48,6 +44,6 @@ public class EmployeeDayRepositoryImpl implements EmployeeDayRepository {
     @Override
     public EmployeeDay findById(Long id) {
         Session currentSession = sessionFactory.getCurrentSession();
-        return currentSession.get(EmployeeDay.class,id);
+        return currentSession.get(EmployeeDay.class, id);
     }
 }

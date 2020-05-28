@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,17 +57,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public boolean containsNum(String num) {
-        return findAllNums().stream().anyMatch(dbNum->dbNum.equalsIgnoreCase(num));
+        return findAllNums().stream().anyMatch(dbNum -> dbNum.equalsIgnoreCase(num));
     }
 
     @Override
     @Transactional
     public Set<Employee> findByDepartment(Department department) {
         Set<Employee> nen = this.repository.findAll().stream()
-                .peek(employee -> System.out.println("nen"))
                 .filter(employee -> department.getName().equals(employee.getDepartment().getName()))
                 .collect(Collectors.toSet());
-        System.out.println("готово");
         return nen;
+    }
+
+    @Override
+    @Transactional
+    public Map<Long, Long> getAmountOfWorkersByDepartment() {
+        return repository.findAll().stream()
+                .collect(Collectors.groupingBy(employee -> employee.getDepartment().getId(), Collectors.counting()));
     }
 }

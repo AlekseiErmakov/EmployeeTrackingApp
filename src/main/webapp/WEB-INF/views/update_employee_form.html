@@ -14,7 +14,8 @@
         Личная карточка сотрудника
     </h1>
     <!--/*@thymesVar id="employeeDto" type="com.tracking.dto.EmployeeDto"*/-->
-    <form action="#" th:action="@{/employee/update/{id}(id=${employeeDto.id})}" th:object="${employeeDto}" method="post">
+    <form action="#" th:action="@{/employee/update/{id}(id=${employeeDto.id})}" th:object="${employeeDto}"
+          method="post">
         <div class="row justify-content-end">
             <div class="col-md-4 mt-5">
                 <img src="">
@@ -108,7 +109,7 @@
                         Департамент
                     </label>
                     <select class="form-control" th:field="*{departmentId}">
-                        <option value="" > -- </option>
+                        <option value=""> --</option>
                         <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
                         <!--/*@thymesVar id="name" type="com.tracking.model"*/-->
                         <!--/*@thymesVar id="id" type="com.tracking.model.employee.Department"*/-->

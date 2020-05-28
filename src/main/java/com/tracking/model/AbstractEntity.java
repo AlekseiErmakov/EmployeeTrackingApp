@@ -13,21 +13,21 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public abstract class AbstractEntity {
-    @Column(name = "created",updatable = false)
+    @Column(name = "created", updatable = false)
     private LocalDateTime created;
 
     @Column(name = "updated", insertable = false)
     private LocalDateTime updated;
 
     @PrePersist
-    public void  toCreate(){
-        if (created == null){
+    public void toCreate() {
+        if (created == null) {
             setCreated(LocalDateTime.now());
         }
     }
 
     @PreUpdate
-    public void toUpdate(){
+    public void toUpdate() {
         setUpdated(LocalDateTime.now());
     }
 }

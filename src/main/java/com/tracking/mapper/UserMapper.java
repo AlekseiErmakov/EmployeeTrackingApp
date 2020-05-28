@@ -26,10 +26,10 @@ public class UserMapper extends AbstractMapper<AppUser, UserDto> {
     }
 
     @PostConstruct
-    public void initMapper(){
+    public void initMapper() {
         modelMapper.createTypeMap(AppUser.class, UserDto.class)
                 .setPostConverter(toDtoConverter());
-        modelMapper.createTypeMap(UserDto.class,AppUser.class)
+        modelMapper.createTypeMap(UserDto.class, AppUser.class)
                 .setPostConverter(toEntityConverter());
     }
 

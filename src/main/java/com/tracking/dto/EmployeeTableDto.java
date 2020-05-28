@@ -15,6 +15,7 @@ public class EmployeeTableDto extends AbstractDto {
     private String num;
     private List<Long> statusList = new ArrayList<>();
     private List<Integer> emptyCells = new ArrayList<>();
+    private List<Integer> endEmptyCells = new ArrayList<>();
     private String monthTitle;
     private String monthTable;
     private int monthNum;

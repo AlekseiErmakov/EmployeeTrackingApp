@@ -8,7 +8,6 @@ import com.tracking.model.tabel.EmployeeDay;
 import com.tracking.model.tabel.EmployeeTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class TableServiceImpl implements TableService {
     @Override
     public DepartmentTable getDepartmentTable(Department department, Set<Employee> employees, int month) {
         List<EmployeeTable> employeeTableSet = employees.stream()
-                .map(employee -> getEmployeeTable(month,employee, getEmployeeDaysByMonth(month, employee)))
+                .map(employee -> getEmployeeTable(month, employee, getEmployeeDaysByMonth(month, employee)))
                 .collect(Collectors.toList());
         DepartmentTable departmentTable = new DepartmentTable();
         departmentTable.setDepartment(department);
@@ -53,7 +52,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public void saveEmployeeTable(Integer month, Employee employee, List<Code> employeeStatusList) {
-        for(int i = 0; i< employeeStatusList.size(); i++){
+        for (int i = 0; i < employeeStatusList.size(); i++) {
             EmployeeDay employeeDay = createEmployeeDay(i + 1, employeeStatusList.get(i), employee, month);
             employeeDayService.save(employeeDay);
         }
@@ -71,12 +70,12 @@ public class TableServiceImpl implements TableService {
 
     private EmployeeDay createEmployeeDay(int day, Code code, Employee employee, Integer month) {
         LocalDate now = LocalDate.now();
-        LocalDate localDate = LocalDate.of(now.getYear(),month,day);
+        LocalDate localDate = LocalDate.of(now.getYear(), month, day);
         EmployeeDay employeeDayByEmployeeAndDate = employeeDayService.getEmployeeDayByEmployeeAndDate(employee, localDate);
-        if (employeeDayByEmployeeAndDate != null){
+        if (employeeDayByEmployeeAndDate != null) {
             employeeDayByEmployeeAndDate.setCode(code);
             return employeeDayByEmployeeAndDate;
-        }else {
+        } else {
             EmployeeDay employeeDay = new EmployeeDay();
             employeeDay.setCode(code);
             employeeDay.setEmployee(employee);

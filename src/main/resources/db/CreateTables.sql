@@ -150,21 +150,21 @@ INSERT INTO holiday (date,created) VALUES ('2020-12-20','2020-05-15');
 INSERT INTO holiday (date,created) VALUES ('2020-12-26','2020-05-15');
 INSERT INTO holiday (date,created) VALUES ('2020-12-27','2020-05-15');
 
-
 CREATE TABLE department
 (
     department_id BIGSERIAL PRIMARY KEY NOT NULL ,
     name CHARACTER VARYING(30),
+    label CHARACTER VARYING(30),
     created TIMESTAMP NOT NULL,
     updated TIMESTAMP
 );
 
-INSERT INTO department (name,created) VALUES ('Rocket Science Department','2020-05-15');
-INSERT INTO department (name,created) VALUES ('Tesla Department','2020-05-15');
-INSERT INTO department (name,created) VALUES ('HyperLoop Department','2020-05-15');
-INSERT INTO department (name,created) VALUES ('Underground Department','2020-05-15');
-INSERT INTO department (name,created) VALUES ('Social Department','2020-05-15');
-INSERT INTO department (name,created) VALUES ('Game Dev Department','2020-05-15');
+INSERT INTO department (name,label,created) VALUES ('Rocket Science Department','/img/deps/rocket-science.jpg','2020-05-15');
+INSERT INTO department (name,label,created) VALUES ('Tesla Department','/img/deps/tesla.jpg','2020-05-15');
+INSERT INTO department (name,label,created) VALUES ('HyperLoop Department','/img/deps/hyperloop.jpg','2020-05-15');
+INSERT INTO department (name,label,created) VALUES ('Underground Department','/img/deps/underground.jpg','2020-05-15');
+INSERT INTO department (name,label,created) VALUES ('Social Department','/img/deps/social.jpg','2020-05-15');
+INSERT INTO department (name,label,created) VALUES ('Game Dev Department','/img/deps/game-dev.jpg','2020-05-15');
 
 CREATE TABLE contact
 (

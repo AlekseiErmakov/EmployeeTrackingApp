@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class RegistrationController {
@@ -52,26 +51,28 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        if (!isSame(userDto.getPassword(),userDto.getPasswordConfirmed())) {
+        if (!isSame(userDto.getPassword(), userDto.getPasswordConfirmed())) {
             model.addAttribute("passwordConfirmed", "Введенные пароли не совпадают");
             return "registration";
         }
-        if (!isSame(userDto.getEmail(),userDto.getEmailConfirmed())) {
+        if (!isSame(userDto.getEmail(), userDto.getEmailConfirmed())) {
             model.addAttribute("emailConfirmed", "Введенные пароли не совпадают");
             return "registration";
         }
         AppUser user = userMapper.toEntity(userDto);
-        Map<String,String> errors = userService.save(user);
-        if (errors.size()>0) {
-            errors.keySet().forEach(key->model.addAttribute(key,errors.get(key)));
+        Map<String, String> errors = userService.save(user);
+        if (errors.size() > 0) {
+            errors.keySet().forEach(key -> model.addAttribute(key, errors.get(key)));
             return "registration";
         }
         return "redirect:/";
     }
+
     @ModelAttribute("roles")
-    public List<Role> getRoles(){
+    public List<Role> getRoles() {
         return roleService.findAll();
     }
+
     private boolean isSame(String password, String passwordConfirmed) {
         return password.equals(passwordConfirmed);
     }

@@ -38,14 +38,15 @@ public class AdminController {
     }
 
     @GetMapping("/update/{id}")
-    public String findUserById(@PathVariable("id") Long id, Model model){
+    public String findUserById(@PathVariable("id") Long id, Model model) {
         AppUser userFromDb = userService.findById(id);
         UserDto userDto = userMapper.toDto(userFromDb);
-        model.addAttribute("userDto",userDto);
+        model.addAttribute("userDto", userDto);
         return "update_user";
     }
+
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id")Long id, UserDto userDto){
+    public String updateUser(@PathVariable("id") Long id, UserDto userDto) {
 
         AppUser appUser = userMapper.toEntity(userDto);
         appUser.setId(id);

@@ -108,7 +108,7 @@
                         Департамент
                     </label>
                     <select class="form-control" th:field="*{departmentId}" required>
-                        <option value="" > -- </option>
+                        <option value=""> --</option>
                         <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
                         <!--/*@thymesVar id="name" type="com.tracking.model"*/-->
                         <!--/*@thymesVar id="id" type="com.tracking.model.employee.Department"*/-->
@@ -148,7 +148,7 @@
         </div>
         <div class="text-right mb-4">
             <button class="btn btn-primary" type="submit">Сохранить</button>
-            <a th:href="@{/table/dep(id=${},)}" type="button" class="btn btn-outline-primary">Отмена</a>
+            <a th:href="@{/employee/list}" type="button" class="btn btn-outline-primary">Отмена</a>
         </div>
     </form>
 </div>

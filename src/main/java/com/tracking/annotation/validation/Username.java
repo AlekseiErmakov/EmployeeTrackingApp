@@ -13,11 +13,11 @@ import java.lang.annotation.*;
 @Documented
 public @interface Username {
 
-    String message () default "username is not valid";
+    String message() default "username is not valid";
 
-    Class<?>[] groups () default {};
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload () default {};
+    Class<? extends Payload>[] payload() default {};
 
     int min() default 3;
 

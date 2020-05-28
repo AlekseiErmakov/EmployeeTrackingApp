@@ -13,7 +13,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Service
-public class DepartmentRepositoryImpl implements DepartmentRepository{
+public class DepartmentRepositoryImpl implements DepartmentRepository {
 
     private SessionFactory sessionFactory;
 
