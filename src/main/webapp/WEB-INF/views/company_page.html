@@ -17,7 +17,7 @@
                 <img th:src="${department.label}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title" th:utext="${department.name}"></h5>
-                    <span>Колличество работников: </span><h1 th:utext="${workers[__${department.id}__]}"></h1>
+                    <span>Колличество работников: </span><span  th:utext="${workers.get(department.id)}"></span><span th:if="${!workers.containsKey(department.id)}">0</span>
                     <a th:href="@{/table/department(id=${department.id},current='current')}" class="btn btn-primary">Табель
                         учета рабочего времени</a>
                 </div>
