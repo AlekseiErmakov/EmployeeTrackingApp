@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@FileStorage(key=Department.class, location = "img/department/")
+@FileStorage(key = Department.class, location = "image/department/")
 public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentRepository departmentRepository;

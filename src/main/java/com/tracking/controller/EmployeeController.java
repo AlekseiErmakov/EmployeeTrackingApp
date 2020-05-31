@@ -11,7 +11,6 @@ import com.tracking.service.employee.PostService;
 import com.tracking.service.file.FileStorageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,7 +53,7 @@ public class EmployeeController {
         }
         Employee employee = employeeMapper.toEntity(employeeDto);
         Employee saved = employeeService.save(employee);
-        fileStorageService.saveImage(file,Employee.class,saved.getId());
+        fileStorageService.saveImage(file, Employee.class, saved.getId());
         return "redirect:/employee/list";
     }
 

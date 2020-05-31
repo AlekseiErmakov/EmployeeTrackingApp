@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@FileStorage(key = Employee.class,location = "image/employee/")
+@FileStorage(key = Employee.class, location = "image/employee/")
 public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository repository;

@@ -4,7 +4,6 @@ import com.tracking.annotation.custom.LocationContainer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.HashMap;
@@ -14,12 +13,13 @@ import java.util.Map;
 public class FIleStorageServiceImpl implements FileStorageService {
 
     @LocationContainer
-    private Map<Class<?>,String> locationMap = new HashMap<>();
+    private Map<Class<?>, String> locationMap = new HashMap<>();
+
+    private String imageSuffix = ".jpg";
 
     @Override
-    public void saveImage(MultipartFile file,Class<?> key, Long id) {
-        File fileIn = new File(locationMap.get(key) + id + ".jpg");
-
+    public void saveImage(MultipartFile file, Class<?> key, Long id) {
+        File fileIn = new File(locationMap.get(key) + id + imageSuffix);
         try (InputStream source = file.getInputStream();
              OutputStream dest = new FileOutputStream(fileIn.getAbsolutePath())) {
             byte[] buffer = new byte[1024];
@@ -33,15 +33,9 @@ public class FIleStorageServiceImpl implements FileStorageService {
     }
 
     @Override
-    public byte[] getImage(Class<?> key, Long id) throws IOException {
-        System.out.println(locationMap.get(key));
-        File serverFile = new File(locationMap.get(key) + id + ".jpg");
+    public byte[] loadImage(Class<?> key, Long id) throws IOException {
+        File serverFile = new File(locationMap.get(key) + id + imageSuffix);
         return Files.readAllBytes(serverFile.toPath());
-    }
-
-    @Override
-    public File getDepartmentImage(Long id) {
-        return null;
     }
 
 

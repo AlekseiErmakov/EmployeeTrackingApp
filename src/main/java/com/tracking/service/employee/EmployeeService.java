@@ -22,5 +22,5 @@ public interface EmployeeService {
 
     Set<Employee> findByDepartment(Department department);
 
-    Map<Long,Long> getAmountOfWorkersByDepartment();
+    Map<Long, Long> getAmountOfWorkersByDepartment();
 }

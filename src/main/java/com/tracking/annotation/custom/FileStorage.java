@@ -7,5 +7,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface FileStorage {
     Class<?> key();
+
     String location();
 }

@@ -26,9 +26,6 @@ public class Department extends AbstractEntity {
     @EqualsAndHashCode.Include
     private String name;
 
-    @Column(name = "label")
-    private String label;
-
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private Set<Employee> employees = new HashSet<>();
 

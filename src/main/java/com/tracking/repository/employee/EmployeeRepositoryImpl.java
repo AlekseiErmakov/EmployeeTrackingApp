@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.io.Serializable;
 import java.util.List;
 
 @Service
@@ -27,7 +26,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public Employee save(Employee employee) {
         Session currentSession = sessionFactory.getCurrentSession();
         Long id = (Long) currentSession.save(employee);
-        return currentSession.get(Employee.class,id);
+        return currentSession.get(Employee.class, id);
     }
 
     @Override

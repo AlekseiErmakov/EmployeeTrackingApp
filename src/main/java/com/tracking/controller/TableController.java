@@ -121,7 +121,7 @@ public class TableController {
     }
 
     @ModelAttribute("workers")
-    public Map<Long,Long> getEmployees(){
+    public Map<Long, Long> getEmployees() {
         return employeeService.getAmountOfWorkersByDepartment();
     }
 

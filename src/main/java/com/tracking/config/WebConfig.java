@@ -13,8 +13,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
-import javax.servlet.MultipartConfigElement;
-
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -69,7 +67,7 @@ public class WebConfig implements WebMvcConfigurer {
         if (!registry.hasMappingForPattern("/img/**")) {
             registry.addResourceHandler("/img/**").addResourceLocations("classpath:/img/");
         }
-        if (!registry.hasMappingForPattern("/avatar/**")){
+        if (!registry.hasMappingForPattern("/avatar/**")) {
             registry.addResourceHandler("/avatar/**").addResourceLocations("classpath:/avatar/");
         }
     }

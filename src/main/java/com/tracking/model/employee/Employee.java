@@ -1,12 +1,15 @@
 package com.tracking.model.employee;
 
 import com.tracking.model.AbstractEntity;
+import com.tracking.model.tabel.EmployeeDay;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "employee")
@@ -61,6 +64,9 @@ public class Employee extends AbstractEntity {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY,orphanRemoval = true)
+    private Set<EmployeeDay> employeeDaySet = new HashSet<>();
 
 
     public String getFullName() {
