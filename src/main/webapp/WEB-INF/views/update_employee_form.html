@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -16,11 +19,11 @@
     </h1>
     <!--/*@thymesVar id="employeeDto" type="com.tracking.dto.EmployeeDto"*/-->
     <form action="#" th:action="@{/employee/update/{id}(id=${employeeDto.id})}" th:object="${employeeDto}"
-          method="post">
+          method="post" enctype="multipart/form-data">
         <div class="row justify-content-end">
             <div class="col-md-6 col-lg-4 mt-5 text-center">
                 <div class="avatar">
-                    <img class="avatar-img" th:src="@{/img/employee/{id}(id=${employeeDto.id})}">
+                    <img class="avatar-img" th:src="@{/img/employee/{id}(id=${employeeDto.id})}" src="http://localhost:8080/img/avatar_default.png">
                     <input class="avatar-file" name="file" type="file">
                 </div>
             </div>
@@ -152,7 +155,7 @@
         </div>
         <div class="text-right mb-4">
             <button class="btn btn-primary" type="submit">Сохранить</button>
-            <a href="/employee/all" type="button" class="btn btn-outline-primary">Отмена</a>
+            <a href="/employee/list" type="button" class="btn btn-outline-primary">Отмена</a>
         </div>
     </form>
 </div>

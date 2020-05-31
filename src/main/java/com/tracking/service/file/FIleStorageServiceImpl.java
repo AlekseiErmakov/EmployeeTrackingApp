@@ -1,6 +1,7 @@
 package com.tracking.service.file;
 
 import com.tracking.annotation.custom.LocationContainer;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ public class FIleStorageServiceImpl implements FileStorageService {
     private Map<Class<?>, String> locationMap = new HashMap<>();
 
     private String imageSuffix = ".jpg";
+    private String defaultImage = "image/default.png";
 
     @Override
     public void saveImage(MultipartFile file, Class<?> key, Long id) {
@@ -33,8 +35,24 @@ public class FIleStorageServiceImpl implements FileStorageService {
     }
 
     @Override
-    public byte[] loadImage(Class<?> key, Long id) throws IOException {
+    public byte[] loadImage(Class<?> key, Long id) {
+        try {
+            File serverFile = new File(locationMap.get(key) + id + imageSuffix);
+            return Files.readAllBytes(serverFile.toPath());
+        } catch (IOException ex) {
+            return getDefaultImage();
+        }
+    }
+
+    @Override
+    public void deleteById(Class<?> key, Long id) {
         File serverFile = new File(locationMap.get(key) + id + imageSuffix);
+        serverFile.delete();
+    }
+
+    @SneakyThrows
+    private byte[] getDefaultImage() {
+        File serverFile = new File(defaultImage);
         return Files.readAllBytes(serverFile.toPath());
     }
 

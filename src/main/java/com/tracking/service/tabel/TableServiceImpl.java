@@ -42,14 +42,6 @@ public class TableServiceImpl implements TableService {
         return departmentTable;
     }
 
-
-    @Override
-    public void saveDepartmentTable(DepartmentTable departmentTable) {
-        departmentTable.getEmployeeTables().stream()
-                .flatMap(employeeTable -> employeeTable.getEmployeeDays().stream())
-                .forEach(employeeDay -> employeeDayService.save(employeeDay));
-    }
-
     @Override
     public void saveEmployeeTable(Integer month, Employee employee, List<Code> employeeStatusList) {
         for (int i = 0; i < employeeStatusList.size(); i++) {

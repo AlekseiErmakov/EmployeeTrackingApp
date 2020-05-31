@@ -9,4 +9,5 @@ public interface FileStorageService {
 
     byte[] loadImage(Class<?> key, Long id) throws IOException;
 
+    void deleteById(Class<?> key, Long id);
 }

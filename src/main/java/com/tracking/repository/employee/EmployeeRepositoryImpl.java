@@ -32,7 +32,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public void update(Employee employee) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.update(employee);
+        currentSession.saveOrUpdate(employee);
     }
 
     @Override

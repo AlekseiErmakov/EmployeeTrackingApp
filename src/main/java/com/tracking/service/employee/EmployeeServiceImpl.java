@@ -77,4 +77,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return repository.findAll().stream()
                 .collect(Collectors.groupingBy(employee -> employee.getDepartment().getId(), Collectors.counting()));
     }
+
+    @Override
+    @Transactional
+    public void update(Employee employee) {
+        this.repository.update(employee);
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
 import java.util.List;
 
 @Service
@@ -23,9 +24,11 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     }
 
     @Override
-    public void save(Department department) {
+    public Department save(Department department) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.saveOrUpdate(department);
+        Long depId = (Long)currentSession.save(department);
+        Department fromDb = currentSession.get(Department.class, depId);
+        return fromDb;
     }
 
     @Override

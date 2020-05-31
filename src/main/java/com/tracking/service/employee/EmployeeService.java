@@ -23,4 +23,6 @@ public interface EmployeeService {
     Set<Employee> findByDepartment(Department department);
 
     Map<Long, Long> getAmountOfWorkersByDepartment();
+
+    void update(Employee employee);
 }

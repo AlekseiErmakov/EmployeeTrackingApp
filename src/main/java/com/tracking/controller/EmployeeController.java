@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +47,6 @@ public class EmployeeController {
     public String saveNewEmployee(@RequestParam("file") MultipartFile file,
                                   EmployeeDto employeeDto) {
 
-
         if (employeeService.containsNum(employeeDto.getNum())) {
             employeeDto.setNum("Работник с таким номером уже существует");
             return "employee_form";
@@ -63,7 +63,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/update/{id}")
-    public String getEmployeeById(@PathVariable("id") Long id, Model model) {
+    public String getEmployeeById( @PathVariable("id") Long id, Model model) {
         Employee update = employeeService.findById(id);
         EmployeeDto employeeDto = employeeMapper.toDto(update);
         model.addAttribute("employeeDto", employeeDto);
@@ -71,16 +71,18 @@ public class EmployeeController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateEmployee(@PathVariable("id") Long id, EmployeeDto employeeDto) {
+    public String updateEmployee(@RequestParam("file") MultipartFile file, @PathVariable("id") Long id, EmployeeDto employeeDto) {
         Employee employee = employeeMapper.toEntity(employeeDto);
         employee.setId(id);
-        employeeService.save(employee);
+        employeeService.update(employee);
+        fileStorageService.saveImage(file,Employee.class,id);
         return "redirect:/employee/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         this.employeeService.deleteById(id);
+        fileStorageService.deleteById(Employee.class,id);
         return "redirect:/employee/list";
     }
 
@@ -99,6 +101,7 @@ public class EmployeeController {
     public List<EmployeeDto> getEmployees() {
         return this.employeeService.findAll().stream()
                 .map(employee -> employeeMapper.toDto(employee))
+                .sorted((Comparator.comparing(EmployeeDto::getNum)))
                 .collect(Collectors.toList());
     }
 

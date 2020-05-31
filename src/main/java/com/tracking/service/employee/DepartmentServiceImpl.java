@@ -22,8 +22,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public void save(Department department) {
-        this.departmentRepository.save(department);
+    public Department save(Department department) {
+       return departmentRepository.save(department);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     public List<Department> findAll() {
         return departmentRepository.findAll();
+    }
+
+    @Override
+    public void update(Department department, Long id) {
+
     }
 }

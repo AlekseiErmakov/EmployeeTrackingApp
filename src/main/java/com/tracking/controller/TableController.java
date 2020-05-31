@@ -105,10 +105,7 @@ public class TableController {
         return "redirect:/table/dep?id=" + employee.getDepartment().getId() + "&month=" + month;
     }
 
-    @ModelAttribute("departments")
-    public List<Department> getDepartments() {
-        return this.departmentService.findAll();
-    }
+
 
     @ModelAttribute("codes")
     public List<Code> getCodes() {

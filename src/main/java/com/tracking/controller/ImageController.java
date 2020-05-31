@@ -35,4 +35,5 @@ public class ImageController {
         return this.fileStorageService.loadImage(Department.class, id);
     }
 
+
 }
