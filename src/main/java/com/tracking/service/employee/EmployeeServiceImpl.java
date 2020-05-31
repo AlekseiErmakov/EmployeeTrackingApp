@@ -1,5 +1,6 @@
 package com.tracking.service.employee;
 
+import com.tracking.annotation.custom.FileStorage;
 import com.tracking.model.employee.Department;
 import com.tracking.model.employee.Employee;
 import com.tracking.repository.employee.EmployeeRepository;
@@ -13,6 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@FileStorage(key = Employee.class,location = "image/employee/")
 public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository repository;
@@ -24,8 +26,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void save(Employee employee) {
-        this.repository.save(employee);
+    public Employee save(Employee employee) {
+        return this.repository.save(employee);
     }
 
     @Override

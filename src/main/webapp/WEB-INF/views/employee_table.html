@@ -15,7 +15,7 @@
     <!--/*@thymesVar id="employeeTableDto" type="com.tracking.dto.EmployeeTableDto"*/-->
     <form th:action="@{/table/save/employee(id=${employeeTableDto.employeeId},month=${employeeTableDto.monthNum})}"
           th:object="${employeeTableDto}" method="post">
-        <h1 class="mt-5 mb-4 text-center">Табель учета рабочего врени сотрудника.</h1>
+        <h1 class="mt-5 mb-4 text-center">Табель учета рабочего времени сотрудника.</h1>
         <h1 class="mt-5 mb-4 text-center" th:text="${employeeTableDto.employeeFullName}"></h1>
         <h1 class="mt-5 mb-4 text-center" th:text="${employeeTableDto.getMonthTitle()}"></h1>
         <div class="calendar mb-4">

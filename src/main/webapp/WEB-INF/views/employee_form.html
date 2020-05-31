@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
 <body>
 
@@ -14,13 +15,15 @@
         Личная карточка сотрудника
     </h1>
     <!--/*@thymesVar id="employeeDto" type="com.tracking.dto.EmployeeDto"*/-->
-    <form action="#" th:action="@{save}" th:object="${employeeDto}" method="post">
+    <form action="#" th:action="@{save}" th:object="${employeeDto}" method="post" enctype="multipart/form-data">
         <div class="row justify-content-end">
-            <div class="col-md-4 mt-5">
-                <img src="">
-                <input type="file">
+            <div class="col-md-6 col-lg-4 mt-5 text-center">
+                <div class="avatar">
+                    <img class="avatar-img" th:src="@{/img/avatar_default.png}">
+                    <input class="avatar-file" name="file" type="file">
+                </div>
             </div>
-            <div class="col-md-4 mt-5">
+            <div class="col-md-6 col-lg-4 mt-5">
                 <h4>Личные данные</h4>
                 <div class="form-group">
                     <label for="firstName">
@@ -50,7 +53,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4 mt-5">
+            <div class="col-md-6 col-lg-4 mt-5">
                 <h4>
                     Адрес
                 </h4>
@@ -80,7 +83,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mt-5">
+            <div class="col-md-6 col-lg-4 mt-5">
                 <h4>Профессиональные данные</h4>
                 <div class="form-group">
                     <label>
@@ -128,7 +131,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mt-5">
+            <div class="col-md-6 col-lg-4 mt-5">
                 <h4>
                     Контактные данные
                 </h4>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +60,7 @@ public class RegistrationController {
             model.addAttribute("emailConfirmed", "Введенные пароли не совпадают");
             return "registration";
         }
+
         AppUser user = userMapper.toEntity(userDto);
         Map<String, String> errors = userService.save(user);
         if (errors.size() > 0) {

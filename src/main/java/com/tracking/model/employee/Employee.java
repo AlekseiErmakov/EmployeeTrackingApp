@@ -20,6 +20,9 @@ public class Employee extends AbstractEntity {
     @Column(name = "employee_id")
     private Long id;
 
+    @Column(name = "photo")
+    private String photo;
+
     @Column(name = "num")
     @EqualsAndHashCode.Include
     private String num;

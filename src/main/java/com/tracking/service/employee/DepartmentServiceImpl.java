@@ -1,5 +1,6 @@
 package com.tracking.service.employee;
 
+import com.tracking.annotation.custom.FileStorage;
 import com.tracking.model.employee.Department;
 import com.tracking.repository.employee.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@FileStorage(key=Department.class, location = "img/department/")
 public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentRepository departmentRepository;

@@ -5,7 +5,9 @@ import com.tracking.model.employee.Employee;
 import java.util.List;
 
 public interface EmployeeRepository {
-    void save(Employee employee);
+    Employee save(Employee employee);
+
+    void update(Employee employee);
 
     Employee findById(Long id);
 

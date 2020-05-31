@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public interface EmployeeService {
-    void save(Employee employee);
+    Employee save(Employee employee);
 
     Employee findById(Long id);
 

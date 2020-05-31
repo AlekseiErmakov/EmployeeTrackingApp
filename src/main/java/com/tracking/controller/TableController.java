@@ -122,7 +122,6 @@ public class TableController {
 
     @ModelAttribute("workers")
     public Map<Long,Long> getEmployees(){
-        System.out.println(employeeService.getAmountOfWorkersByDepartment());
         return employeeService.getAmountOfWorkersByDepartment();
     }
 

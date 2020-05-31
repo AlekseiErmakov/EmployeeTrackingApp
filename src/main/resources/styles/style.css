@@ -127,3 +127,44 @@
 .calendar .calendar-holiday .form-control:focus {
     box-shadow: 0 0 0 0.2rem rgba(225,225,225,.5);
 }
+
+.avatar {
+    position: relative;
+    display: inline-block;
+    max-width: 240px;
+    border: 1px solid #ced4da;
+    padding: 5px;
+}
+
+.avatar-img {
+    max-width: 100%;
+    border: 1px solid #ced4da;
+}
+
+.avatar-file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.avatar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: .15s ease-in-out;
+    background: rgba(0,0,0,.5) url("data:image/svg+xml;charset=utf8,%3Csvg height='30' viewBox='0 0 448 448' width='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m272 184c-4.417969 0-8-3.582031-8-8v-176h-80v176c0 4.417969-3.582031 8-8 8h-176v80h176c4.417969 0 8 3.582031 8 8v176h80v-176c0-4.417969 3.582031-8 8-8h176v-80zm0 0' fill='%23fff'/%3E%3C/svg%3E") center no-repeat;
+    opacity: 0;
+}
+
+.avatar:hover::after {
+    opacity: 1;
+}
