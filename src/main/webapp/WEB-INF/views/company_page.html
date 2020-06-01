@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Главная</a>
+                    <a class="nav-link" th:href="@{/}">Главная!</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" >
                     <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
