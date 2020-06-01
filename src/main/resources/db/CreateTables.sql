@@ -290,4 +290,5 @@ INSERT INTO app_role (name, created) VALUES ('ROLE_USER','2020-05-15');
 INSERT INTO app_role (name, created) VALUES ('ROLE_ADMIN','2020-05-15');
 
 
+insert into user_role(app_user_id, app_role_id) VALUES (2,2);
 
