@@ -85,7 +85,9 @@ public class AdminController {
 
     @PostMapping("/save/default/image")
     public String saveImage(@RequestParam("file") MultipartFile file){
-        fileStorageService.saveDefaultImage(file);
+        if (!file.isEmpty()){
+            fileStorageService.saveDefaultImage(file);
+        }
         return "redirect:/admin/config";
     }
 

@@ -53,7 +53,9 @@ public class EmployeeController {
         }
         Employee employee = employeeMapper.toEntity(employeeDto);
         Employee saved = employeeService.save(employee);
-        fileStorageService.saveImage(file, Employee.class, saved.getId());
+        if (!file.isEmpty()){
+            fileStorageService.saveImage(file, Employee.class, saved.getId());
+        }
         return "redirect:/employee/list";
     }
 
@@ -75,7 +77,9 @@ public class EmployeeController {
         Employee employee = employeeMapper.toEntity(employeeDto);
         employee.setId(id);
         employeeService.update(employee);
-        fileStorageService.saveImage(file, Employee.class, id);
+        if (!file.isEmpty()){
+            fileStorageService.saveImage(file, Employee.class, id);
+        }
         return "redirect:/employee/list";
     }
 

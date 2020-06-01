@@ -39,7 +39,7 @@ public class DepartmentController {
     @PostMapping("/save")
     public String saveNewDepartment(@RequestParam("file") MultipartFile file, Department department, BindingResult bindingResult, Model model) {
         Department fromDb = departmentService.save(department);
-        if (file != null) {
+        if (!file.isEmpty()) {
             fileStorageService.saveImage(file, Department.class, fromDb.getId());
         }
         return "redirect:/company";
