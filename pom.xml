@@ -244,6 +244,9 @@
                   <destFileName>webapp-runner.jar</destFileName>
                 </artifactItem>
               </artifactItems>
+              <configuration>
+                <appName>myworkertracking</appName>
+              </configuration>
             </configuration>
           </execution>
         </executions>
