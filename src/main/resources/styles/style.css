@@ -12,6 +12,11 @@ a:focus {
     color: #117a8b;
 }
 
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #17a2b8;
+    background-color: #17a2b8;
+}
+
 .center-container {
     display: flex;
     flex-direction: column;
@@ -129,7 +134,7 @@ a:focus {
 .calendar-item:nth-of-type(7n - 1) .form-control,
 .calendar-item:nth-of-type(7n) .form-control,
 .calendar-holiday .form-control {
-    background-color: #dc3545;
+    background-color: #FF5252;
     color: #fff;
 }
 
@@ -142,7 +147,7 @@ a:focus {
 .calendar-item:nth-of-type(7n - 1) .calendar-date,
 .calendar-item:nth-of-type(7n) .calendar-date,
 .calendar-holiday .calendar-date {
-    border-color: #bd1f2e;
+    border-color: #E53935;
 }
 
 .calendar-item:nth-of-type(7n - 1) .form-control:focus,
