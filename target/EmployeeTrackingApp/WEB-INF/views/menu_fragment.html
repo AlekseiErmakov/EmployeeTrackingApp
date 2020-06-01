@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec=" http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Главная</a>
+                </li>
+                <li class="nav-item " sec:authorize="hasRole('ROLE_USER')" >
+                    <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-link" th:href="@{/company}">Список департаментов</a>
+                </li>
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/list}">Список пользователей</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="mr-2" sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/login}">Войти</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/registration}">Зарегистрироваться</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="/logout">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+</body>
+</html>

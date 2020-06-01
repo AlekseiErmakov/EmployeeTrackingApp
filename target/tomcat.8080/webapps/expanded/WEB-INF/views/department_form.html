@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Department form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mt-4">
+        Департамент
+    </h1>
+    <!--/*@thymesVar id="department" type="com.tracking.model.employee.Department"*/-->
+    <form action="#" th:action="@{save}" th:object="${department}" method="post" enctype="multipart/form-data">
+        <div>
+            <div class="mt-5 text-center">
+                <div class="avatar">
+                    <img class="avatar-img" th:src="@{/img/avatar_default.png}">
+                    <input class="avatar-file" name="file" type="file">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    Название
+                </label>
+                <input class="form-control" type="text" th:field="*{name}" required>
+            </div>
+        <div class="text-right mb-4">
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+            <a th:href="@{/company}" type="button" class="btn btn-outline-primary">Назад</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

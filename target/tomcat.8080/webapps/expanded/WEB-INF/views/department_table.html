@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Главная</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" >
+                    <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-link" th:href="@{/company}">Список департаментов</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/list}">Список пользователей</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="mr-2" sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/login}">Войти</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/registration}">Зарегистрироваться</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="/logout">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+    <h1 class="text-center mt-5">
+        Табель учета рабочего времени
+        <!--/*@thymesVar id="departmentTable" type="com.tracking.model.tabel.DepartmentTable"*/-->
+        <span th:utext="${departmentTable.department.name}"></span>
+    </h1>
+    <div class="mb-5 mt-5">
+        <!--/*@thymesVar id="departmentTable" type="com.tracking.model.tabel.DepartmentTable"*/-->
+        <ul class="nav nav-tabs">
+            <li class="nav-item" th:each="month, iStat : ${months}">
+                <a class="nav-link"
+                   th:classappend="${departmentTable.month == iStat.count} ? active : null"
+                   th:href="@{/table/dep(id=${departmentTable.department.id},month=${iStat.count})}"
+                   th:utext="${month}"></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active">
+                <div class="table-responsive table-department mt-3">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Табельный номер</th>
+                            <th>Сотрудник</th>
+                            <th class="table-department-col" th:each="index : ${departmentTable.days}"
+                                th:utext="${index}"></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="employeeTable : ${departmentTable.employeeTables}">
+                            <td th:utext="${employeeTable.employee.num}"></td>
+                            <td th:utext="${employeeTable.employee.getFullName()}"></td>
+                            <td class="table-department-col" th:each="employeeDay,iStat : ${employeeTable.employeeDays}"
+                                th:classappend="${holidays.contains(iStat.count)} ? calendar-holiday : null">
+                                <div th:if="${employeeDay.code != null}" th:text="${employeeDay.code.status}"></div>
+                                <div th:if="${employeeDay.code == null}">...</div>
+                            </td>
+                            <td>
+                                <a th:href="@{/table/employee(id=${employeeTable.employee.id},month=${departmentTable.month})}"
+                                   class="btn-icon btn-icon-gray">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         width="16" height="16"
+                                         viewBox="0 0 383.947 383.947"
+                                         style="enable-background:new 0 0 383.947 383.947;" xml:space="preserve">
+                                            <polygon
+                                                    points="0,303.947 0,383.947 80,383.947 316.053,147.893 236.053,67.893"/>
+                                        <path d="M377.707,56.053L327.893,6.24c-8.32-8.32-21.867-8.32-30.187,0l-39.04,39.04l80,80l39.04-39.04C386.027,77.92,386.027,64.373,377.707,56.053z"/>
+                                        </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-right mr-3">
+                    <a th:href="@{/table/company}">Назад</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

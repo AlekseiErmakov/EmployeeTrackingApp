@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Главная</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" >
+                    <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-link" th:href="@{/company}">Список департаментов</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/list}">Список пользователей</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="mr-2" sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/login}">Войти</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/registration}">Зарегистрироваться</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="/logout">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<!--/*@thymesVar id="employee" type="com.tracking.dto.EmployeeDto"*/-->
+<div class="container">
+    <h1 class="text-center mt-5">
+        Личная карточка сотрудника
+    </h1>
+    <!--/*@thymesVar id="employeeDto" type="com.tracking.dto.EmployeeDto"*/-->
+    <form action="#" th:action="@{save}" th:object="${employeeDto}" method="post" enctype="multipart/form-data">
+        <div class="row justify-content-end">
+            <div class="col-md-6 col-lg-4 mt-5 text-center">
+                <div class="avatar">
+                    <img class="avatar-img" th:src="@{/img/avatar_default.png}">
+                    <input class="avatar-file" name="file" type="file">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mt-5">
+                <h4>Личные данные</h4>
+                <div class="form-group">
+                    <label for="firstName">
+                        Имя
+                    </label>
+                    <input id="firstName" class="form-control" type="text" th:field="*{firstName}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Фамилия
+                    </label>
+                    <input class="form-control" type="text" th:field="*{lastName}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Дата рождения
+                    </label>
+                    <input class="form-control" type="date" th:field="*{birthday}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Пол
+                    </label>
+                    <select class="form-control" th:field="*{gender}" required>
+                        <option th:value="'М'">М</option>
+                        <option th:value="'Ж'">Ж</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mt-5">
+                <h4>
+                    Адрес
+                </h4>
+                <div class="form-group">
+                    <label>
+                        Город
+                    </label>
+                    <input class="form-control" type="text" th:field="*{address.city}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Улица
+                    </label>
+                    <input class="form-control" type="text" th:field="*{address.street}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Дом
+                    </label>
+                    <input class="form-control" type="text" th:field="*{address.house}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Квартира
+                    </label>
+                    <input class="form-control" type="text" th:field="*{address.flat}" required>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mt-5">
+                <h4>Профессиональные данные</h4>
+                <div class="form-group">
+                    <label>
+                        Табельный номер
+                    </label>
+                    <input class="form-control" type="text" th:field="*{num}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Должность
+                    </label>
+                    <select class="form-control" th:field="*{postId}" required>
+                        <option value=""> --</option>
+                        <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
+                        <!--/*@thymesVar id="name" type="com.tracking.model"*/-->
+                        <!--/*@thymesVar id="post" type="com.tracking.model.employee.Post"*/-->
+                        <option th:each="post : ${posts}"
+                                th:value="${post.id}"
+                                th:utext="${post.name}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Департамент
+                    </label>
+                    <select class="form-control" th:field="*{departmentId}" required>
+                        <option value=""> --</option>
+                        <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
+                        <!--/*@thymesVar id="name" type="com.tracking.model"*/-->
+                        <!--/*@thymesVar id="id" type="com.tracking.model.employee.Department"*/-->
+                        <option th:each="department : ${departments}"
+                                th:value="${department.id}"
+                                th:utext="${department.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remote" th:field="*{isRemote}">
+                        <label class="form-check-label" for="remote">
+                            Удаленка
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mt-5">
+                <h4>
+                    Контактные данные
+                </h4>
+                <div class="form-group">
+                    <label>
+                        Email
+                    </label>
+                    <input class="form-control" type="email" th:field="*{contact.email}" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Мобильный телефон
+                    </label>
+                    <input class="form-control" type="tel" th:field="*{contact.phone}" required>
+                </div>
+            </div>
+        </div>
+        <div class="text-right mb-4">
+            <button class="btn btn-info" type="submit">Сохранить</button>
+            <a th:href="@{/employee/list}" type="button" class="btn btn-outline-info">Отмена</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

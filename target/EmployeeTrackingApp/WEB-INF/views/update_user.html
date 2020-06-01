@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Главная</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" >
+                    <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-link" th:href="@{/company}">Список департаментов</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/list}">Список пользователей</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="mr-2" sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/login}">Войти</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/registration}">Зарегистрироваться</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="/logout">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <h1 class="text-center mt-5">Редактирование пользователя</h1>
+    <div class="row justify-content-center">
+        <div class="login-form">
+            <!--/*@thymesVar id="userDto" type="com.tracking.dto.UserDto"*/-->
+            <form class="mt-3 mb-3" th:action="@{/admin/update/{id}(id=${userDto.id})}" th:object="${userDto}"
+                  method="post">
+                <div class="form-group">
+                    <label for="login">Имя пользователя</label>
+                    <input type="text" class="form-control" id="login" th:field="*{username}" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона</label>
+                    <input type="tel" class="form-control" id="phone" th:field="*{phoneNumber}" required>
+                </div>
+                <!--/*@thymesVar id="roles" type="com.tracking.model.registration.Role"*/-->
+                <div class="custom-control custom-checkbox" th:each="role : ${roles}">
+                    <input type="checkbox" class="custom-control-input" name="role" th:field="*{roleIdSet}"
+                           th:value="${role.id}" th:id="${role.id}">
+                    <label class="custom-control-label" th:for="${role.id}" th:utext="${role.name}"></label>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-info btn-block mb-3">Сохранить</button>
+                </div>
+                <div class="text-center mt-4">
+                    <a th:href="@{/admin/list}">Назад</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
