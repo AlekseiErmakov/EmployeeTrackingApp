@@ -62,6 +62,9 @@
                     <div class="text-center mt-auto" sec:authorize="hasRole('ROLE_ADMIN')">
                         <a th:href="@{/company/department/{id}(id=${department.id})}" class="btn btn-info mt-3">Edit</a>
                     </div>
+                    <div class="text-center mt-auto" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/company/delete/{id}(id=${department.id})}" class="btn btn-info mt-3">Edit</a>
+                    </div>
                     <div class="text-center mt-auto">
                         <a th:href="@{/table/department(id=${department.id},current='current')}" class="btn btn-info mt-3">Табель</a>
                     </div>

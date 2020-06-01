@@ -169,8 +169,8 @@ INSERT INTO department (name,created) VALUES ('Game Dev Department','2020-05-15'
 CREATE TABLE contact
 (
     contact_id BIGSERIAL PRIMARY KEY NOT NULL ,
-    email CHARACTER VARYING(30),
-    phone CHARACTER VARYING(20),
+    email CHARACTER VARYING(100),
+    phone CHARACTER VARYING(100),
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP
 );
@@ -178,26 +178,26 @@ CREATE TABLE contact
 CREATE TABLE address
 (
     address_id BIGSERIAL PRIMARY KEY NOT NULL ,
-    city CHARACTER VARYING(30),
-    street CHARACTER VARYING(30),
-    house CHARACTER VARYING(10),
-    flat CHARACTER VARYING(10),
+    city CHARACTER VARYING(100),
+    street CHARACTER VARYING(100),
+    house CHARACTER VARYING(100),
+    flat CHARACTER VARYING(100),
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP
 );
 CREATE TABLE post
 (
     post_id BIGSERIAL PRIMARY KEY NOT NULL ,
-    name CHARACTER VARYING(30),
+    name CHARACTER VARYING(100),
     created TIMESTAMP NOT NULL ,
     updated TIMESTAMP
 );
 CREATE TABLE employee
 (
     employee_id BIGSERIAL PRIMARY KEY  NOT NULL ,
-    num CHARACTER VARYING(30),
-    first_name CHARACTER VARYING(30),
-    last_name CHARACTER VARYING(30),
+    num CHARACTER VARYING(100),
+    first_name CHARACTER VARYING(100),
+    last_name CHARACTER VARYING(100),
     birthday TIMESTAMP,
     gender CHARACTER VARYING(30),
     is_remote BOOLEAN,
@@ -288,6 +288,7 @@ CREATE TABLE user_role
 
 INSERT INTO app_role (name, created) VALUES ('ROLE_USER','2020-05-15');
 INSERT INTO app_role (name, created) VALUES ('ROLE_ADMIN','2020-05-15');
-SELECT * FROM user_role;
 
+
+insert into user_role(app_user_id, app_role_id) VALUES (2,2);
 
