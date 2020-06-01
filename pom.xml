@@ -219,14 +219,7 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>8</source>
-          <target>8</target>
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -244,9 +237,6 @@
                   <destFileName>webapp-runner.jar</destFileName>
                 </artifactItem>
               </artifactItems>
-              <configuration>
-                <appName>myworkertracking</appName>
-              </configuration>
             </configuration>
           </execution>
         </executions>
@@ -267,6 +257,9 @@
                   <destFileName>webapp-runner.jar</destFileName>
                 </artifactItem>
               </artifactItems>
+              <configuration>
+                <appName>myworkertracking</appName>
+              </configuration>
             </configuration>
           </execution>
         </executions>
