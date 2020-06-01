@@ -12,10 +12,42 @@
     <link rel="icon" href="favicon.ico">
 </head>
 <body>
-<div class="container">
-    <h1 class="text-center mt-4">
-        Департамент
-    </h1>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Главная</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" >
+                    <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-link" th:href="@{/company}">Список департаментов</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/list}">Список пользователей</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="mr-2" sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/login}">Войти</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/registration}">Зарегистрироваться</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="/logout">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<h1 class="text-center mt-4">Департамент</h1>
+<div class="reg-form">
     <!--/*@thymesVar id="department" type="com.tracking.model.employee.Department"*/-->
     <form action="#" th:action="@{save}" th:object="${department}" method="post" enctype="multipart/form-data">
         <div>
@@ -32,8 +64,8 @@
                 <input class="form-control" type="text" th:field="*{name}" required>
             </div>
         <div class="text-right mb-4">
-            <button class="btn btn-primary" type="submit">Сохранить</button>
-            <a th:href="@{/company}" type="button" class="btn btn-outline-primary">Назад</a>
+            <button class="btn btn-info" type="submit">Сохранить</button>
+            <a th:href="@{/company}" type="button" class="btn btn-outline-info">Назад</a>
         </div>
     </form>
 </div>

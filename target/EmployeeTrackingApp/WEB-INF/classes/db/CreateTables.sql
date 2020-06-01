@@ -288,5 +288,6 @@ CREATE TABLE user_role
 
 INSERT INTO app_role (name, created) VALUES ('ROLE_USER','2020-05-15');
 INSERT INTO app_role (name, created) VALUES ('ROLE_ADMIN','2020-05-15');
+SELECT * FROM user_role;
 
 

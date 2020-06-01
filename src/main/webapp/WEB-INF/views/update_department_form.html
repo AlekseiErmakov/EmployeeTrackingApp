@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Company page</title>
+    <title>Update Department</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/styles/style.css}">
@@ -25,7 +25,7 @@
                 <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" >
                     <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
                 </li>
-                <li class="nav-item active" sec:authorize="hasRole('ROLE_USER')">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
                     <a class="nav-link" th:href="@{/company}">Список департаментов</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
@@ -46,29 +46,28 @@
         </div>
     </div>
 </header>
-<div class="container pb-5">
-    <h1 class="text-center mt-5">Список подразделений</h1>
-    <div class="mb-4" sec:authorize="hasRole('ROLE_ADMIN')">
-        <a th:href="@{/company/new}" class="btn btn-info">Добавить</a>
-    </div>
-    <div class="row">
-        <!--/*@thymesVar id="departments" type="com.tracking.model.employee.Department"*/-->
-        <div class="col-sm-6 col-md-4 col-lg-3 mt-4" th:each="department : ${departments}">
-            <div class="card department-card">
-                <img th:src="@{/img/department/{id}(id=${department.id})}" class="card-img-top" alt="...">
-                <div class="card-body department-card-body">
-                    <h5 class="card-title" th:utext="${department.name}"></h5>
-                    <div><span>Количество работников: </span><span  th:utext="${workers.get(department.id)}"></span><span th:if="${!workers.containsKey(department.id)}">0</span></div>
-                    <div class="text-center mt-auto" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/company/department/{id}(id=${department.id})}" class="btn btn-info mt-3">Edit</a>
-                    </div>
-                    <div class="text-center mt-auto">
-                        <a th:href="@{/table/department(id=${department.id},current='current')}" class="btn btn-info mt-3">Табель</a>
-                    </div>
+<h1 class="text-center mt-4">Департамент</h1>
+<div class="reg-form">
+    <!--/*@thymesVar id="department" type="com.tracking.model.employee.Department"*/-->
+    <form action="#" th:action="@{company/update/{id}(id=${department.id})}" th:object="${department}" method="post" enctype="multipart/form-data">
+        <div>
+            <div class="mt-5 text-center">
+                <div class="avatar">
+                    <img class="avatar-img" th:src="@{/img/department/{id}(id=${department.id})}">
+                    <input class="avatar-file" name="file" type="file">
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="form-group">
+                <label>
+                    Название
+                </label>
+                <input class="form-control" type="text" th:field="*{name}" required>
+            </div>
+            <div class="text-right mb-4">
+                <button class="btn btn-info" type="submit">Сохранить</button>
+                <a th:href="@{/company}" type="button" class="btn btn-outline-info">Назад</a>
+            </div>
+    </form>
 </div>
 </body>
 </html>

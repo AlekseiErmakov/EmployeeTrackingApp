@@ -1,6 +1,7 @@
 package com.tracking.controller;
 
 import com.tracking.model.employee.Department;
+import com.tracking.model.employee.Employee;
 import com.tracking.service.employee.DepartmentService;
 import com.tracking.service.employee.EmployeeService;
 import com.tracking.service.file.FileStorageService;
@@ -56,7 +57,14 @@ public class DepartmentController {
         if (file != null){
             fileStorageService.saveImage(file,Department.class,id);
         }
-        return "redirect:/";
+        return "redirect:/company";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        this.departmentService.deleteById(id);
+        fileStorageService.deleteById(Department.class,id);
+        return "redirect:/company";
     }
 
     @ModelAttribute("workers")
