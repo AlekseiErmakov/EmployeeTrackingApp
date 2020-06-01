@@ -14,7 +14,8 @@
 <body>
 <header class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -22,7 +23,7 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/}">Главная</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" >
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
                     <a class="nav-link" th:href="@{/employee/list}">Список сотрудников</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
@@ -30,6 +31,9 @@
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" th:href="@{/admin/list}">Список пользователей</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/config}">Настройки</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -47,27 +51,42 @@
     </div>
 </header>
 <h1 class="text-center mt-4">Департамент</h1>
-<div class="reg-form">
-    <!--/*@thymesVar id="department" type="com.tracking.model.employee.Department"*/-->
-    <form action="#" th:action="@{company/update/{id}(id=${department.id})}" th:object="${department}" method="post" enctype="multipart/form-data">
-        <div>
-            <div class="mt-5 text-center">
-                <div class="avatar">
-                    <img class="avatar-img" th:src="@{/img/department/{id}(id=${department.id})}">
-                    <input class="avatar-file" name="file" type="file">
+<div class="row justify-content-center">
+    <div class="reg-form">
+        <!--/*@thymesVar id="department" type="com.tracking.model.employee.Department"*/-->
+        <form action="#" th:action="@{/company/update/{id}(id=${department.id})}" th:object="${department}"
+              method="post" enctype="multipart/form-data">
+            <div>
+                <div class="mt-5 text-center">
+                    <div class="avatar">
+                        <div class="avatar-img">
+                            <img th:src="@{/img/department/{id}(id=${department.id})}">
+                        </div>
+                        <input class="avatar-file" name="file" type="file">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Название
+                    </label>
+                    <input class="form-control" type="text" th:field="*{name}" required>
+                </div>
+                <div class="text-right mb-4">
+                    <button class="btn btn-info" type="submit">Сохранить</button>
+                    <a th:href="@{/company}" type="button" class="btn btn-outline-info">Назад</a>
                 </div>
             </div>
-            <div class="form-group">
-                <label>
-                    Название
-                </label>
-                <input class="form-control" type="text" th:field="*{name}" required>
-            </div>
-            <div class="text-right mb-4">
-                <button class="btn btn-info" type="submit">Сохранить</button>
-                <a th:href="@{/company}" type="button" class="btn btn-outline-info">Назад</a>
-            </div>
-    </form>
+        </form>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 </html>

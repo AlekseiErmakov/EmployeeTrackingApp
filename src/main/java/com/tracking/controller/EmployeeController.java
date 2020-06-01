@@ -63,7 +63,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/update/{id}")
-    public String getEmployeeById( @PathVariable("id") Long id, Model model) {
+    public String getEmployeeById(@PathVariable("id") Long id, Model model) {
         Employee update = employeeService.findById(id);
         EmployeeDto employeeDto = employeeMapper.toDto(update);
         model.addAttribute("employeeDto", employeeDto);
@@ -75,14 +75,14 @@ public class EmployeeController {
         Employee employee = employeeMapper.toEntity(employeeDto);
         employee.setId(id);
         employeeService.update(employee);
-        fileStorageService.saveImage(file,Employee.class,id);
+        fileStorageService.saveImage(file, Employee.class, id);
         return "redirect:/employee/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         this.employeeService.deleteById(id);
-        fileStorageService.deleteById(Employee.class,id);
+        fileStorageService.deleteById(Employee.class, id);
         return "redirect:/employee/list";
     }
 

@@ -106,7 +106,6 @@ public class TableController {
     }
 
 
-
     @ModelAttribute("codes")
     public List<Code> getCodes() {
         return this.codeService.findAll();

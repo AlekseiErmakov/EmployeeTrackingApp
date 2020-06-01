@@ -35,5 +35,11 @@ public class ImageController {
         return this.fileStorageService.loadImage(Department.class, id);
     }
 
+    @GetMapping("/default")
+    @ResponseBody
+    public byte[] getDefault() throws IOException {
+        return this.fileStorageService.getDefaultImage();
+    }
+
 
 }

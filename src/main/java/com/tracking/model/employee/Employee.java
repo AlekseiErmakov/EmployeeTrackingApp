@@ -62,7 +62,7 @@ public class Employee extends AbstractEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<EmployeeDay> employeeDaySet = new HashSet<>();
 
 

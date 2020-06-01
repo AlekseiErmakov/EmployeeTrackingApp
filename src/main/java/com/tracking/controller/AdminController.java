@@ -4,12 +4,14 @@ import com.tracking.dto.UserDto;
 import com.tracking.mapper.UserMapper;
 import com.tracking.model.registration.AppUser;
 import com.tracking.model.registration.Role;
+import com.tracking.service.file.FileStorageService;
 import com.tracking.service.user.RoleService;
 import com.tracking.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,12 +22,14 @@ public class AdminController {
     private UserService userService;
     private RoleService roleService;
     private UserMapper userMapper;
+    private FileStorageService fileStorageService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService, UserMapper userMapper) {
+    public AdminController(UserService userService, RoleService roleService, UserMapper userMapper, FileStorageService fileStorageService) {
         this.userService = userService;
         this.roleService = roleService;
         this.userMapper = userMapper;
+        this.fileStorageService = fileStorageService;
     }
 
     @GetMapping("/add_role/")
@@ -74,6 +78,17 @@ public class AdminController {
         return "redirect:/admin/list";
     }
 
+    @GetMapping("/config")
+    public String getConfigPage(){
+        return "config";
+    }
+
+    @PostMapping("/save/default/image")
+    public String saveImage(@RequestParam("file") MultipartFile file){
+        fileStorageService.saveDefaultImage(file);
+        return "redirect:/admin/config";
+    }
+
     @ModelAttribute("users")
     public List<AppUser> getAppUsers() {
         return userService.findAll();
@@ -83,5 +98,6 @@ public class AdminController {
     public List<Role> getAppRoles() {
         return roleService.findAll();
     }
+
 
 }

@@ -22,16 +22,7 @@ public class FIleStorageServiceImpl implements FileStorageService {
     @Override
     public void saveImage(MultipartFile file, Class<?> key, Long id) {
         File fileIn = new File(locationMap.get(key) + id + imageSuffix);
-        try (InputStream source = file.getInputStream();
-             OutputStream dest = new FileOutputStream(fileIn.getAbsolutePath())) {
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = source.read(buffer)) > 0) {
-                dest.write(buffer, 0, length);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveFile(fileIn,file);
     }
 
     @Override
@@ -50,8 +41,27 @@ public class FIleStorageServiceImpl implements FileStorageService {
         serverFile.delete();
     }
 
+    @Override
+    public void saveDefaultImage(MultipartFile file) {
+        File fileIn = new File(defaultImage);
+        saveFile(fileIn,file);
+    }
+
+    private void saveFile(File fileIn, MultipartFile file){
+        try (InputStream source = file.getInputStream();
+             OutputStream dest = new FileOutputStream(fileIn.getAbsolutePath())) {
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = source.read(buffer)) > 0) {
+                dest.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @SneakyThrows
-    private byte[] getDefaultImage() {
+    public byte[] getDefaultImage() {
         File serverFile = new File(defaultImage);
         return Files.readAllBytes(serverFile.toPath());
     }
