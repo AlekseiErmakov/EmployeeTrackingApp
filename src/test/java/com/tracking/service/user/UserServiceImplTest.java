@@ -64,41 +64,41 @@ public class UserServiceImplTest {
         misha.setUsername("misha");
         misha.setPassword("qwerty");
 
-        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(alex,misha));
+        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(alex, misha));
 
         Mockito.when(repository.findById(1L)).thenReturn(alex);
     }
 
     @Test
     public void testFindById() {
-        assertEquals(alex,userService.findById(1L));
+        assertEquals(alex, userService.findById(1L));
     }
 
     @Test
     public void testFindAll() {
 
-        assertEquals(Arrays.asList(alex,misha),userService.findAll());
+        assertEquals(Arrays.asList(alex, misha), userService.findAll());
     }
 
     @Test
     public void testAddRoleToUser() {
-        userService.addRoleToUser(alex,admin);
+        userService.addRoleToUser(alex, admin);
     }
 
     @Test
     public void testRemoveRoleFromUser() {
-        userService.addRoleToUser(alex,admin);
-        userService.removeRoleFromUser(alex,admin);
+        userService.addRoleToUser(alex, admin);
+        userService.removeRoleFromUser(alex, admin);
     }
 
     @Test
     public void save() {
         Map<String, String> exceptionAttribute = new HashMap<>();
-        Mockito.when(repository.findByField("username",alex.getUsername())).thenReturn(null);
-        Mockito.when(repository.findByField("email",alex.getEmail())).thenReturn(null);
-        Mockito.when(repository.findByField("phoneNumber",alex.getPhoneNumber())).thenReturn(null);
+        Mockito.when(repository.findByField("username", alex.getUsername())).thenReturn(null);
+        Mockito.when(repository.findByField("email", alex.getEmail())).thenReturn(null);
+        Mockito.when(repository.findByField("phoneNumber", alex.getPhoneNumber())).thenReturn(null);
 
-        assertEquals(exceptionAttribute,userService.save(alex));
+        assertEquals(exceptionAttribute, userService.save(alex));
 
     }
 
@@ -106,7 +106,7 @@ public class UserServiceImplTest {
     public void update() {
         alex.setUsername("noAlex");
         userService.update(alex);
-        assertEquals(alex,repository.findById(1L));
+        assertEquals(alex, repository.findById(1L));
     }
 
     @Test

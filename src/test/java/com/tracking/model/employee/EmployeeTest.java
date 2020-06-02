@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class EmployeeTest {
     private Employee alex;
@@ -26,22 +26,23 @@ public class EmployeeTest {
 
     @Test
     public void getFullName() {
-        assertEquals(firstName + " " + lastName,alex.getFullName());
+        assertEquals(firstName + " " + lastName, alex.getFullName());
     }
 
     @Test
     public void getIsRemoteDescription() {
         alex.setIsRemote(true);
-        assertEquals("Удаленная работа",alex.getIsRemoteDescription());
+        assertEquals("Удаленная работа", alex.getIsRemoteDescription());
     }
+
     @Test
     public void getIsNotRemoteDescription() {
         alex.setIsRemote(false);
-        assertEquals("Работа в офисе",alex.getIsRemoteDescription());
+        assertEquals("Работа в офисе", alex.getIsRemoteDescription());
     }
 
     @Test
     public void getAge() {
-        assertEquals(age,alex.getAge());
+        assertEquals(age, alex.getAge());
     }
 }

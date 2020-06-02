@@ -77,7 +77,7 @@ public class Employee extends AbstractEntity {
     public int getAge() {
         LocalDate now = LocalDate.now();
         int yearDif = now.getYear() - birthday.getYear();
-        if (now.getMonthValue() > birthday.getMonthValue()){
+        if (now.getMonthValue() > birthday.getMonthValue()) {
             return --yearDif;
         }
         return now.getDayOfMonth() - birthday.getDayOfMonth() > 0 ? --yearDif : yearDif;
