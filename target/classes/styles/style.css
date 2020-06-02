@@ -12,7 +12,7 @@ a:focus {
     color: #117a8b;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
+.custom-control-input:checked ~ .custom-control-label::before {
     border-color: #17a2b8;
     background-color: #17a2b8;
 }

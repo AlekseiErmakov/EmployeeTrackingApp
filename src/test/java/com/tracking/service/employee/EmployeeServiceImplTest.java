@@ -10,10 +10,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static org.junit.Assert.*;
+
 @RunWith(MockitoJUnitRunner.class)
 public class EmployeeServiceImplTest {
 
@@ -31,7 +31,8 @@ public class EmployeeServiceImplTest {
     private Department rocketScience;
 
 
-    private List<String> nums = Arrays.asList("8235","8236");
+    private List<String> nums = Arrays.asList("8235", "8236");
+
     @Before
     public void setUp() throws Exception {
         employeeService = new EmployeeServiceImpl(repository);
@@ -55,33 +56,33 @@ public class EmployeeServiceImplTest {
         misha.setNum(nums.get(1));
         misha.setFirstName("Misha");
         misha.setDepartment(tesla);
-        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(alex,misha));
+        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(alex, misha));
     }
 
     @Test
     public void testSave() {
         Mockito.when(repository.save(alex)).thenReturn(alex);
         Employee save = employeeService.save(alex);
-        assertEquals(save,alex);
+        assertEquals(save, alex);
     }
 
     @Test
     public void testFindById() {
         Mockito.when(repository.findById(1L)).thenReturn(alex);
         Employee byId = employeeService.findById(1L);
-        assertEquals(byId,alex);
+        assertEquals(byId, alex);
     }
 
     @Test
     public void testFindAll() {
 
-        assertEquals(Arrays.asList(alex,misha),employeeService.findAll());
+        assertEquals(Arrays.asList(alex, misha), employeeService.findAll());
     }
 
     @Test
     public void testFindAllNums() {
 
-        assertEquals(nums,employeeService.findAllNums());
+        assertEquals(nums, employeeService.findAllNums());
     }
 
     @Test
@@ -96,20 +97,20 @@ public class EmployeeServiceImplTest {
         Set<Employee> employees = new HashSet<>();
         employees.add(alex);
         employees.add(misha);
-       assertEquals(employees,employeeService.findByDepartment(tesla));
+        assertEquals(employees, employeeService.findByDepartment(tesla));
     }
 
     @Test
     public void findByEmptyDepartment() {
         Set<Employee> employees = new HashSet<>();
-        assertEquals(employees,employeeService.findByDepartment(rocketScience));
+        assertEquals(employees, employeeService.findByDepartment(rocketScience));
     }
 
     @Test
     public void getAmountOfWorkersByDepartment() {
-        Map<Long,Long> amount = new HashMap<>();
-        amount.put(1L,2L);
-        assertEquals(amount,employeeService.getAmountOfWorkersByDepartment());
+        Map<Long, Long> amount = new HashMap<>();
+        amount.put(1L, 2L);
+        assertEquals(amount, employeeService.getAmountOfWorkersByDepartment());
     }
 
     @Test
@@ -117,6 +118,6 @@ public class EmployeeServiceImplTest {
         Mockito.when(repository.findById(1L)).thenReturn(alex);
         alex.setFirstName("Name");
         employeeService.update(alex);
-        assertEquals(alex,employeeService.findById(1L));
+        assertEquals(alex, employeeService.findById(1L));
     }
 }

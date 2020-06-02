@@ -11,7 +11,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 @RunWith(MockitoJUnitRunner.class)
 public class CodeServiceImplTest {
 
@@ -39,17 +40,17 @@ public class CodeServiceImplTest {
 
 
         Mockito.when(repository.findById(1L)).thenReturn(illness);
-        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(illness,absence));
+        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(illness, absence));
     }
 
     @Test
     public void findAll() {
-        assertEquals(Arrays.asList(illness,absence),codeService.findAll());
+        assertEquals(Arrays.asList(illness, absence), codeService.findAll());
     }
 
     @Test
     public void findById() {
 
-        assertEquals(illness,codeService.findById(1L));
+        assertEquals(illness, codeService.findById(1L));
     }
 }

@@ -13,7 +13,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 @RunWith(MockitoJUnitRunner.class)
 public class HolidayRepositoryImplTest {
 
@@ -22,8 +23,8 @@ public class HolidayRepositoryImplTest {
 
     private HolidayService holidayService;
 
-    private LocalDate start = LocalDate.of(2020,6,1);
-    private LocalDate end = LocalDate.of(2020,6,30);
+    private LocalDate start = LocalDate.of(2020, 6, 1);
+    private LocalDate end = LocalDate.of(2020, 6, 30);
 
     private Holiday holidayOne;
     private Holiday holidayTwo;
@@ -34,17 +35,17 @@ public class HolidayRepositoryImplTest {
         holidayService = new HolidayServiceImpl(holidayRepository);
 
         holidayOne = new Holiday();
-        holidayOne.setDate(LocalDate.of(2020,6,12));
+        holidayOne.setDate(LocalDate.of(2020, 6, 12));
 
         holidayTwo = new Holiday();
-        holidayTwo.setDate(LocalDate.of(2020,6,13));
+        holidayTwo.setDate(LocalDate.of(2020, 6, 13));
 
-        Mockito.when(holidayRepository.findHolidaysByMonth(start,end)).thenReturn(Arrays.asList(holidayOne,holidayTwo));
+        Mockito.when(holidayRepository.findHolidaysByMonth(start, end)).thenReturn(Arrays.asList(holidayOne, holidayTwo));
     }
 
     @Test
     public void testFindHolidaysByMonth() {
 
-        assertEquals(Arrays.asList(12,13),holidayService.getHolidayDatesByMonth(6));
+        assertEquals(Arrays.asList(12, 13), holidayService.getHolidayDatesByMonth(6));
     }
 }

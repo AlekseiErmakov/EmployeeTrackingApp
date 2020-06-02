@@ -79,13 +79,13 @@ public class AdminController {
     }
 
     @GetMapping("/config")
-    public String getConfigPage(){
+    public String getConfigPage() {
         return "config";
     }
 
     @PostMapping("/save/default/image")
-    public String saveImage(@RequestParam("file") MultipartFile file){
-        if (!file.isEmpty()){
+    public String saveImage(@RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
             fileStorageService.saveDefaultImage(file);
         }
         return "redirect:/admin/config";

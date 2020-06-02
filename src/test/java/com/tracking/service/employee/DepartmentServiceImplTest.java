@@ -11,7 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DepartmentServiceImplTest {
@@ -38,27 +38,27 @@ public class DepartmentServiceImplTest {
     @Test
     public void testSave() {
         Mockito.when(repository.save(tesla)).thenReturn(tesla);
-        assertEquals(tesla,departmentService.save(tesla));
+        assertEquals(tesla, departmentService.save(tesla));
     }
 
 
     @Test
     public void testFindById() {
         Mockito.when(repository.findById(1L)).thenReturn(tesla);
-        assertEquals(tesla,departmentService.findById(1L));
+        assertEquals(tesla, departmentService.findById(1L));
     }
 
     @Test
     public void testFindAll() {
-        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(tesla,rocketScience));
-        assertEquals(Arrays.asList(tesla,rocketScience),departmentService.findAll());
+        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(tesla, rocketScience));
+        assertEquals(Arrays.asList(tesla, rocketScience), departmentService.findAll());
     }
 
     @Test
     public void testUpdate() {
         Mockito.when(repository.findById(1L)).thenReturn(tesla);
         tesla.setName("Name");
-        departmentService.update(tesla,1L);
-        assertEquals(tesla,departmentService.findById(1L));
+        departmentService.update(tesla, 1L);
+        assertEquals(tesla, departmentService.findById(1L));
     }
 }

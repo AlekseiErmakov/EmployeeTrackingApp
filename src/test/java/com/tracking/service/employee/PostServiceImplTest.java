@@ -1,11 +1,7 @@
 package com.tracking.service.employee;
 
 import com.tracking.model.employee.Post;
-import com.tracking.model.tabel.Code;
 import com.tracking.repository.employee.PostRepository;
-import com.tracking.repository.tabel.CodeRepository;
-import com.tracking.service.tabel.CodeService;
-import com.tracking.service.tabel.CodeServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostServiceImplTest {
@@ -42,18 +38,18 @@ public class PostServiceImplTest {
         javaScriptDev.setId(2L);
 
         Mockito.when(repository.findById(1L)).thenReturn(javaDev);
-        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(javaDev,javaScriptDev));
+        Mockito.when(repository.findAll()).thenReturn(Arrays.asList(javaDev, javaScriptDev));
     }
 
 
     @Test
     public void testFindById() {
 
-        assertEquals(javaDev,postService.findById(1L));
+        assertEquals(javaDev, postService.findById(1L));
     }
 
     @Test
     public void testFindAll() {
-        assertEquals(Arrays.asList(javaDev,javaScriptDev),postService.findAll());
+        assertEquals(Arrays.asList(javaDev, javaScriptDev), postService.findAll());
     }
 }

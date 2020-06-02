@@ -22,7 +22,7 @@ public class FIleStorageServiceImpl implements FileStorageService {
     @Override
     public void saveImage(MultipartFile file, Class<?> key, Long id) {
         File fileIn = new File(locationMap.get(key) + id + imageSuffix);
-        saveFile(fileIn,file);
+        saveFile(fileIn, file);
     }
 
     @Override
@@ -44,10 +44,10 @@ public class FIleStorageServiceImpl implements FileStorageService {
     @Override
     public void saveDefaultImage(MultipartFile file) {
         File fileIn = new File(defaultImage);
-        saveFile(fileIn,file);
+        saveFile(fileIn, file);
     }
 
-    private void saveFile(File fileIn, MultipartFile file){
+    private void saveFile(File fileIn, MultipartFile file) {
         try (InputStream source = file.getInputStream();
              OutputStream dest = new FileOutputStream(fileIn.getAbsolutePath())) {
             byte[] buffer = new byte[1024];
