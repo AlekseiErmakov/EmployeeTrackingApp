@@ -12,4 +12,6 @@ public interface DepartmentRepository {
     Department findById(Long id);
 
     List<Department> findAll();
+
+    void update(Department department);
 }

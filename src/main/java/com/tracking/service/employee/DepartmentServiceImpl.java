@@ -45,7 +45,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    @Transactional
     public void update(Department department, Long id) {
-
+        Department fromDb = departmentRepository.findById(id);
+        department.setId(fromDb.getId());
+        departmentRepository.update(department);
     }
 }

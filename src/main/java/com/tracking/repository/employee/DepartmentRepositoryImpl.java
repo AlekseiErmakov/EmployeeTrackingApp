@@ -54,4 +54,10 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
         Query<Department> query = currentSession.createQuery(cq);
         return query.getResultList();
     }
+
+    @Override
+    public void update(Department department) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(department);
+    }
 }

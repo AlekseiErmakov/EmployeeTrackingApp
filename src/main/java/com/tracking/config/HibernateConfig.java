@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:database_heroku.properties")
+@PropertySource("classpath:database.properties")
 @ComponentScan("com.tracking")
 @EnableTransactionManagement
 public class HibernateConfig {

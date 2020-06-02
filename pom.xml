@@ -109,7 +109,7 @@
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
-      <version>1.3.1</version>
+      <version>1.3.3</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -181,7 +181,6 @@
       <version>3.0.4.RELEASE</version>
     </dependency>
 
-
   </dependencies>
   <build>
     <finalName>EmployeeTrackingApp</finalName>
@@ -237,8 +236,6 @@
                   <destFileName>webapp-runner.jar</destFileName>
                 </artifactItem>
               </artifactItems>
-              <source>8</source>
-              <target>8</target>
             </configuration>
           </execution>
         </executions>

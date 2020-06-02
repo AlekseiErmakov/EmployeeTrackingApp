@@ -46,7 +46,6 @@ public class EmployeeController {
     @PostMapping("/save")
     public String saveNewEmployee(@RequestParam("file") MultipartFile file,
                                   EmployeeDto employeeDto) {
-
         if (employeeService.containsNum(employeeDto.getNum())) {
             employeeDto.setNum("Работник с таким номером уже существует");
             return "employee_form";
