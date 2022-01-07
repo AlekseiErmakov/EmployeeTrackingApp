@@ -19,7 +19,7 @@
     <javax.servlet>3.0.1</javax.servlet>
     <jstl.version>1.2</jstl.version>
     <postgres.version>42.2.12</postgres.version>
-    <h2.version>1.4.194</h2.version>
+    <h2.version>2.0.206</h2.version>
     <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
     <hibernate.version>5.4.15.Final</hibernate.version>
     <hibernate.valid.version>6.0.10.Final</hibernate.valid.version>
